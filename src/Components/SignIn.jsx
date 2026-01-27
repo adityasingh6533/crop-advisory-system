@@ -2,18 +2,20 @@ import "../css/SignIn.css";
 import {signIn} from "../api/userApi";
 
 const HandleSignIn = async () => {
-  const username = document.getElementById("text1").value;
+  const credential = document.getElementById("text1").value;
   const password = document.getElementById("password1").value;
   
-  if (!username || !password) {
-    alert("Both username and password are required!");
+  if (!credential || !password) {
+    alert("Both email/username and password are required!");
     return;
   }
   
   try {
-    const response = await signIn({ username, password });
+    const response = await signIn({ credential, password });
     alert("Sign-in successful! Welcome " + response.user.FirstName);
-    window.location.href = '/';
+    window.location.href = '/Dashboard';
+    sessionStorage.setItem("user", JSON.stringify(response.user));
+
   } catch (error) {
     alert("Sign-in failed: " + error.message);
   }
@@ -33,11 +35,11 @@ const SignIn = () => {
     <div className="LoginPage">
 
         <h2>Get Your Crop Advisory</h2>
-        <pre>          Please enter your details to sign-in</pre>
+        <pre>Please enter your details to sign-in</pre>
         
          <br></br>
         
-        <input type="text"  id="text1" placeholder="Username" className="Username" />
+        <input type="text"  id="text1" placeholder="Username or Email" className="Username" />
         
         <br></br>
         <br></br>
@@ -48,6 +50,8 @@ const SignIn = () => {
         <br></br>
 
         <button type="button" className="sign-in" onClick={HandleSignIn}>Sign-in</button>
+       
+
       <br></br>
       <br></br>
 

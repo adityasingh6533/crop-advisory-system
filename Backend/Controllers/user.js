@@ -25,14 +25,20 @@ const createUser = async (req, res) => {
 const signInUser = async (req, res) => {
     const body = req.body;
 
-    if(!body.username || !body.password) {
-        return res.status(400).json({ error: "Username and password are required" });
+    if(!body.credential || !body.password) {
+        return res.status(400).json({ error: "Email/Username and password are required" });
     }
     try {
-        const user = await User.findOne({ Username: body.username });
-        
+        // Find user by either username or email
+        const user = await User.findOne({
+            $or: [
+                { Username: body.credential },
+                { Email: body.credential }
+            ]
+        });
+
         if (!user) {
-            return res.status(401).json({ error: "Username does not exist" });
+            return res.status(401).json({ error: "User does not exist" });
         }
         
         if (user.Password !== body.password) {

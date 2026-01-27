@@ -1,122 +1,163 @@
+/* ===== GLOBAL RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   transition: all 0.5s ease;
+  overflow: hidden;
 }
 
+/* ===== OPTIONAL PAGE FADE ===== */
 body.fade-out {
   opacity: 0;
   transform: translateY(-10px);
 }
 
-h2{
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.Heading {
-  padding-top: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
+/* ===== MAIN BACKGROUND ===== */
 .MainContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 100vh;
   width: 100vw;
   padding: 20px;
-  background-color: #204325;
+
+  background:
+    linear-gradient(
+      rgba(16, 50, 35, 0.65),
+      rgba(16, 50, 35, 0.65)
+    ),
+    url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");   /* image public/images me honi chahiye */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+/* ===== SIGNIN CARD (PREMIUM GLASS LOOK) ===== */
 .LoginPage {
-  padding: 50px;
   width: 100%;
-  max-width: 450px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  max-width: 460px;
+  padding: 50px 45px;
+
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  animation: fadeUp 0.6s ease;
 }
 
+/* ===== ENTRY ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== HEADING ===== */
 .LoginPage h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1b4332;
   margin-bottom: 10px;
-  color: #333;
-  font-size: 24px;
 }
 
-input {
+/* ===== SUBTEXT ===== */
+.LoginPage pre {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 22px;
+}
+
+/* ===== INPUT FIELDS ===== */
+.LoginPage input {
   width: 100%;
-  padding: 14px 16px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  margin: 10px 0;
-  transition: border-color 0.3s;
+  padding: 15px 18px;
+  margin: 12px 0;
+
+  font-size: 0.95rem;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+
+  background: #f9fdfb;
+  transition: all 0.25s ease;
 }
 
-input:focus {
+.LoginPage input:focus {
   outline: none;
-  border-color: #18511a;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
 }
 
-button {
+/* ===== PRIMARY SIGNIN BUTTON ===== */
+.LoginPage button {
   width: 100%;
-  padding: 14px 16px;
-  font-size: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  background-color: #165018;
-  color: white;
+  padding: 14px;
+  margin-top: 18px;
+
+  font-size: 1rem;
   font-weight: 600;
-  transition: background-color 0.3s;
-  margin-top: 10px;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  box-shadow: 0 10px 22px rgba(45, 106, 79, 0.35);
+  transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #226525;
+.LoginPage button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #1b4332, #40916c);
 }
 
+/* ===== SIGNUP SECONDARY BUTTON ===== */
 button.signup-btn {
-  background-color: transparent;
-  color: #236626;
-  border: 1px solid #296e2b;
-  padding: 5px 15px;
-  margin-left: 5px;
   width: auto;
+  margin: 16px auto 0;
+  display: block;
+
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  background: transparent;
+  color: #2d6a4f;
+
+  border: 1px solid #2d6a4f;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 button.signup-btn:hover {
-  background-color: #4CAF50;
-  color: white;
+  background: #2d6a4f;
+  color: #ffffff;
 }
 
-pre {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #666;
-  margin: 5px 0;
-}
-
-p {
+/* ===== FOOTER TEXT ===== */
+.LoginPage p {
+  margin-top: 18px;
   text-align: center;
-  color: #333;
+  font-size: 0.9rem;
+  color: #495057;
 }
-
-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-

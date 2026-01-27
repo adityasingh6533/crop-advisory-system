@@ -2,94 +2,147 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f5f5f5;
-}
-
-/* container */
+/* ===== BACKGROUND ===== */
 .home-container {
   min-height: 100vh;
-  background-color: #e8f5e9;
-  padding: 60px;
+  padding: 90px 40px;
+
+  background:
+    linear-gradient(
+      rgba(16, 50, 35, 0.65),
+      rgba(16, 50, 35, 0.65)
+    ),
+    url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
 }
 
-/* header */
+/* ===== HEADING (PREMIUM HERO) ===== */
 .header {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .h1 {
+  font-size: 3.2rem;
   font-weight: 700;
-  color: #1b4332;
-  text-decoration: underline;
+  letter-spacing: 1.5px;
+  color: #f1faee;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
-/* subtitle */
+/* ===== SUBTITLE ===== */
 .subtitle {
   text-align: center;
-  margin-bottom: 40px;
-  color: #2d6a4f;
-  font-weight: 500;
+  font-size: 1.25rem;
+  color: #d8f3dc;
+  margin-bottom: 60px;
 }
 
-/* points section */
+/* ===== PREMIUM BULLET POINTS ===== */
 .points {
-  max-width: 700px;
-  margin: 0 auto;
-  
-}
-li {
-    background-color: #2d6a4f;
+  max-width: 780px;
+  margin: 60px auto;
 }
 
 .points ul {
   list-style: none;
-  
+  padding: 0;
 }
 
 .points li {
-  background: linear-gradient(to right, #eaf7ef, #f3fbf7);
-  padding: 18px 24px;
-  margin-bottom: 18px;
- 
+  position: relative;
 
-  border-left: 6px solid #2d6a4f;
-  border-radius: 12px;
+  padding: 22px 28px 22px 60px;
+  margin-bottom: 22px;
 
-  font-size: 1.05rem;
-  font-weight: 500;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(240, 255, 247, 0.96)
+  );
+
+  border-radius: 18px;
+
+  font-size: 1.08rem;
+  font-weight: 600;
   color: #1b4332;
 
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* 🔥 floating button bottom-right */
+/* glowing left bar */
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  height: 76%;
+  width: 7px;
+
+  background: linear-gradient(180deg, #2d6a4f, #52b788);
+  border-radius: 8px;
+
+  box-shadow: 0 0 12px rgba(82, 183, 136, 0.8);
+}
+
+/* icon circle */
+.points li::after {
+  content: "✔";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  color: #ffffff;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(82, 183, 136, 0.9);
+}
+
+/* ===== FLOATING BUTTON (BOTTOM RIGHT) ===== */
 .get-started-button {
   position: fixed;
   bottom: 30px;
-  right: 30px;
-
-  padding: 10px 20px;
-  font-size: 0.9rem;
+  right: 20px;
+  width: 200px;
+  padding: 16px 14px;
+  font-size: 1.05rem;
   font-weight: 600;
-  width: auto;
 
   color: #ffffff;
   background: linear-gradient(135deg, #2d6a4f, #52b788);
   border: none;
-  border-radius: 25px;
+  border-radius: 35px;
   cursor: pointer;
 
-  box-shadow: 0 6px 16px rgba(45, 106, 79, 0.3);
-  transition: all 0.25s ease;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  transition: all 0.3s ease;
 }
 
 .get-started-button:hover {
+  transform: translateY(-4px) scale(1.03);
   background: linear-gradient(135deg, #1b4332, #40916c);
-  transform: translateY(-3px);
 }

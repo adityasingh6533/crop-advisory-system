@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./Models/user');
 const userRouter = require('./api/user');
+const CropInputRouter = require('./api/CropInput');
 const app= express();
 
 app.use(cors());
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:  false }));
 
 app.use('/api/user', userRouter);
+app.use('/api/cropInput', CropInputRouter);
 
 const PORT = process.env.PORT || 5000;
 
