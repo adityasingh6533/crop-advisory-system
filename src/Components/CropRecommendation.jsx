@@ -8,10 +8,12 @@ const CropRecommendation = () => {
 
   // 🔐 Auth Guard
   useEffect(() => {
-    if (!sessionStorage.getItem("user")) {
-      navigate("/SignIn");
-    }
-  }, [navigate]);
+  const user = sessionStorage.getItem("user");
+  if (!user) {
+    navigate("/SignIn", { replace: true });
+  }
+}, [navigate]);
+
 
   const handleRecommendation = async () => {
     const location = document.querySelector('input[type="text"]').value;
@@ -39,14 +41,13 @@ const CropRecommendation = () => {
     try {
       const response = await createCropInput(cropInputData);
 
-      // ✅ pehle store karo
-      sessionStorage.setItem(
-        "CropInput",
-        JSON.stringify(response.CropInput)
-      );
-
+      
+     sessionStorage.setItem(
+  "CropInput",
+  JSON.stringify(response.cropInput)
+);
       alert("Crop input submitted successfully!");
-      navigate("/Dashboard"); // ✅ React way
+      navigate("/weather")
     } catch (error) {
       console.error("Error submitting crop input:", error);
       alert("Error submitting crop input: " + error.message);
@@ -101,7 +102,7 @@ const CropRecommendation = () => {
             </select>
           </div>
 
-          <button className="recommend-btn" onClick={handleRecommendation}>
+          <button type="button" className="recommend-btn" onClick={handleRecommendation}>
             Get Recommendation
           </button>
 

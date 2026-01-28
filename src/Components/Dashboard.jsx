@@ -58,7 +58,7 @@ const Dashboard = () => {
           </div>
 
           <div className="action-card">
-           <button onClick={() => window.location.href = '/WeatherForecast'}>
+           <button onClick={() => window.location.href = '/Forecast'}>
              🌦️ Check Weather Forecast
            </button>
           </div>
@@ -70,7 +70,7 @@ const Dashboard = () => {
           </div>
 
           <div className="action-card">
-            <button onClick={() => window.location.href = '/SoilBasedSuggestions'}>
+            <button onClick={() => window.location.href = '/Soil'}>
               🌱 Soil Based Suggestions
             </button>
           </div>

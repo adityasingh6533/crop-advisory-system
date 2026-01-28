@@ -1,0 +1,77 @@
+
+
+.weather-page {
+  min-height: 100vh;
+  padding: 30px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.weather-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.weather-header p {
+  color: #cfd8dc;
+  margin-top: 6px;
+}
+
+.weather-main-card {
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.temp-section h2 {
+  font-size: 64px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.temp-section span {
+  font-size: 18px;
+  color: #90caf9;
+}
+
+.location {
+  font-size: 16px;
+  color: #e0f7fa;
+  margin-right: 20px;
+}
+
+.weather-info-grid {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.info-card {
+  padding: 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+}
+
+.info-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #81d4fa;
+}
+
+.info-card p {
+  margin-top: 10px;
+  font-size: 20px;
+}

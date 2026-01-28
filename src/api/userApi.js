@@ -1,4 +1,5 @@
-const baseURL = 'http://localhost:5000/api/user';
+// Backend is currently running with PORT from .env (5001 in your setup)
+const baseURL = 'http://localhost:5001/api/user';
 
 export const createUser = async (userData) => {
   try {

@@ -1,22 +1,20 @@
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ===== DASHBOARD BACKGROUND ===== */
+/* ===== DASHBOARD BACKGROUND (IMAGE + OVERLAY) ===== */
 .dashboard-container {
   min-height: 100vh;
   padding: 40px 20px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   background:
     linear-gradient(
-      rgba(16, 50, 35, 0.65),
-      rgba(16, 50, 35, 0.65)
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45)
     ),
     url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");
 
@@ -25,82 +23,20 @@
   background-repeat: no-repeat;
 }
 
-/* ===== MAIN DASHBOARD CARD ===== */
+/* ===== MAIN GLASS CARD ===== */
 .dashboard-card {
-  width: 100%;
-  max-width: 900px;
-  padding: 50px;
+  max-width: 1200px;
+  margin: auto;
 
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 26px;
+  padding: 40px;
 
-  box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-/* ===== HEADING ===== */
-.dashboard-heading {
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #1b4332;
-  margin-bottom: 10px;
-}
-
-/* ===== SUBTITLE ===== */
-.dashboard-subtitle {
-  text-align: center;
-  font-size: 1.1rem;
-  color: #6c757d;
-  margin-bottom: 40px;
-}
-
-/* ===== ACTION GRID ===== */
-.dashboard-actions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-/* ===== ACTION CARD ===== */
-.action-card {
-  padding: 26px 24px;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(240, 255, 247, 0.98)
-  );
-
-  border-radius: 18px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #1b4332;
-
-  text-align: center;
-  cursor: pointer;
-
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-
-  transition: all 0.3s ease;
-}
-
-.action-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .dashboard-actions {
-    grid-template-columns: 1fr;
-  }
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+  animation: fadeUp 0.8s ease;
 }
 
 /* ===== USER INFO BAR ===== */
@@ -109,88 +45,111 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 18px 26px;
-  margin-bottom: 35px;
+  background: rgba(255,255,255,0.20);
+  backdrop-filter: blur(14px);
 
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.97),
-    rgba(240, 255, 247, 0.97)
-  );
+  border-radius: 20px;
+  padding: 18px 24px;
+  margin-bottom: 30px;
 
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  color: #eafff3;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.25);
 }
 
-/* left section */
-.user-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.username {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
-/* avatar */
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+.email {
+  font-size: 0.9rem;
+  color: #b7e4c7;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  padding: 8px 22px;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
 
   background: linear-gradient(135deg, #2d6a4f, #52b788);
   color: #ffffff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 1.3rem;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* text */
-.user-text .username {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #1b4332;
-}
-
-.user-text .email {
-  font-size: 0.85rem;
-  color: #6c757d;
-}
-
-/* right badge */
-.user-right .badge {
-  padding: 6px 14px;
-
-  font-size: 0.75rem;
   font-weight: 600;
 
-  color: #2d6a4f;
-  background: rgba(45, 106, 79, 0.12);
-
-  border-radius: 20px;
-  border: 1px solid rgba(45, 106, 79, 0.25);
-}
-.logout-btn {
-  padding: 8px 18px;
-  font-size: 1.10rem;
-  font-weight: 600;
-
-  color: #ffffff;
-  background: linear-gradient(135deg, #2d6a4f, #40916c);
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
   transition: all 0.25s ease;
 }
 
 .logout-btn:hover {
+  background: linear-gradient(135deg, #1b4332, #40916c);
+  transform: scale(1.05);
+}
+
+/* ===== HEADINGS ===== */
+.dashboard-heading {
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #eafff3;
+  letter-spacing: 0.6px;
+}
+
+.dashboard-subtitle {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 40px;
+  color: #b7e4c7;
+  font-size: 1.05rem;
+}
+
+
+/* ===== ACTION BUTTONS (NO BACKGROUND BOXES) ===== */
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 40px;
+}
+
+/* ACTUAL BUTTON STYLE */
+.main-btn {
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  color: #ffffff;
+
+  border: none;
+  border-radius: 14px;
+  padding: 14px 30px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+}
+
+/* HOVER */
+.main-btn:hover {
+  background: linear-gradient(135deg, #1b4332, #40916c);
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+}
+
+/* CLICK */
+.main-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

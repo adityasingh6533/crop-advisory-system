@@ -1,4 +1,5 @@
-const baseURL = 'http://localhost:5000/api/cropInput';
+// Backend is running with PORT from .env (5001 in your setup)
+const baseURL = 'http://localhost:5001/api/cropInput';
 
 export const createCropInput = async (cropInputData) => {
   try {
