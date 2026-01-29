@@ -1,4 +1,3 @@
-// NOTE: backend is currently running on 5001 (5000 was responding 404)
 const BASE_URL = "http://localhost:5001/api/weather";
 
 export const getCurrentWeather = async (location) => {

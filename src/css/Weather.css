@@ -1,4 +1,55 @@
 
+/* ===== FORECAST BUTTON (WEATHER THEME) ===== */
+.forecast-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.forecast-btn {
+  width: auto;  
+  padding: 15px 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(144, 202, 249, 0.4);
+  cursor: pointer;
+  max-width: 260px; 
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+
+  color: #e3f2fd;
+
+  /* 🔥 glass + blue gradient */
+  background: linear-gradient(
+    135deg,
+    rgba(33, 150, 243, 0.25),
+    rgba(3, 169, 244, 0.18)
+  );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  transition: all 0.35s ease;
+}
+
+/* 🔥 Hover = premium weather app feel */
+.forecast-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(33, 150, 243, 0.45),
+    rgba(3, 169, 244, 0.35)
+  );
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(144, 202, 249, 0.35);
+}
 
 .weather-page {
   min-height: 100vh;
