@@ -21,7 +21,7 @@ const Dashboard = () => {
   <div className="user-left">
     <div className="avatar">👤</div>
     <div className="user-text">
-      <h3 className="username">Welcome, {user.FirstName} </h3>
+      <h3 className="username">Welcome, {user.Username} </h3>
       <p className="email">{user.Email}</p>
     </div>
   </div>
@@ -74,6 +74,12 @@ const Dashboard = () => {
               🌱 Soil Based Suggestions
             </button>
           </div>
+
+          <div className="action-card">
+    <button onClick={() => window.location.href = '/Detect'}>
+      🧪 Crop Disease Detection
+    </button>
+  </div>
         </div>
 
       </div>

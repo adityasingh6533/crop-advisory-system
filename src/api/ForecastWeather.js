@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5001/api/weather";
+const BASE_URL = "http://localhost:5002/api/weather";
 
 export const getWeatherForecast = async (location) => {
   const res = await fetch(

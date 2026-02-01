@@ -109,39 +109,59 @@
   margin-top: 4px;
 }
 
-/* SEASONAL INSIGHT */
+/* 🌱 SEASONAL INSIGHT — WEATHER THEME MATCHED */
 .seasonal-insight {
-  max-width: 1100px;          /* 🔥 wide horizontal */
-  margin: 40px auto 0 auto;  /* 🔥 center align */
-  
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+
   background: linear-gradient(
     135deg,
-    rgba(82,183,136,0.35),
-    rgba(64,145,108,0.35)
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05)
   );
 
-  backdrop-filter: blur(14px);
-  border-radius: 22px;
-  padding: 32px 50px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
-  color: #eafff3;
+  border-radius: 26px;
+  padding: 36px 60px;
+
+  color: #eafaf1;
   text-align: center;
 
-  box-shadow: 0 18px 40px rgba(0,0,0,0.3);
-  animation: fadeUp 1s ease;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.15),
+    0 25px 60px rgba(0,0,0,0.45);
+
+  animation: fadeUp 0.9s ease;
 }
 
-.seasonal-insight p {
-  max-width: 900px;   /* 🔥 text bhi horizontally spread */
-  margin: 0 auto;
-  line-height: 1.7;
-  font-size: 1.05rem;
-}
-
-
+/* Heading */
 .seasonal-insight h3 {
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #95d5b2;
+  letter-spacing: 0.4px;
 }
+
+/* Text */
+.seasonal-insight p {
+  max-width: 950px;
+  margin: 0 auto;
+
+  font-size: 1.05rem;
+  line-height: 1.75;
+
+  color: #e0f2f1;
+}
+
+/* Highlight important words */
+.seasonal-insight strong {
+  color: #b7e4c7;
+  font-weight: 600;
+}
+
 
 /* ANIMATIONS */
 @keyframes bgMove {
@@ -158,4 +178,52 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* ===== FORECAST ACTION BUTTON ===== */
+.forecast-action {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 10px;
+}
+
+.recommend-btn {
+    width: auto;  
+  padding: 12px 20px;
+  border-radius: 26px;
+  border: 1px solid rgba(144, 202, 249, 0.4);
+  cursor: pointer;
+  max-width: 260px; 
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin-top: -5px;
+
+  color: #e3f2fd;
+
+  /* 🔥 glass + blue gradient */
+  background: linear-gradient(
+    135deg,
+    rgba(33, 150, 243, 0.25),
+    rgba(3, 169, 244, 0.18)
+  );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  transition: all 0.35s ease;
+ 
+}
+
+.recommend-btn:hover {
+  transform: translateY(-4px) scale(1.04);  background: linear-gradient(
+    135deg,
+    rgba(33, 150, 243, 0.45),
+    rgba(3, 169, 244, 0.35)
+  );  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(144, 202, 249, 0.35);
 }

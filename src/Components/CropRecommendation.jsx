@@ -83,9 +83,9 @@ const CropRecommendation = () => {
           </div>
 
           <div className="form-group">
-            <label>Season</label>
+            <label>Crop</label>
             <select>
-              <option>Select season</option>
+              <option>Select crop</option>
               <option>Kharif</option>
               <option>Rabi</option>
               <option>Zaid</option>
@@ -102,8 +102,8 @@ const CropRecommendation = () => {
             </select>
           </div>
 
-          <button type="button" className="recommend-btn" onClick={handleRecommendation}>
-            Get Recommendation
+          <button type="button" className="view-weather-btn" onClick={handleRecommendation}>
+            View Weather
           </button>
 
         </div>

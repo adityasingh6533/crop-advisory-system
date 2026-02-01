@@ -1,5 +1,5 @@
 
-const baseURL = 'http://localhost:5001/api/user';
+const baseURL = 'http://localhost:5002/api/user';
 
 export const createUser = async (userData) => {
   try {

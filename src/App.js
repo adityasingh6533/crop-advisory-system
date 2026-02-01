@@ -9,6 +9,8 @@ import Weather from './Components/Weather';
 import Soil from './Components/Soil';
 import SeasonalPlanning from './Components/CropPlanning';
 import Forecast from './Components/Forecast';
+import FinalRecommendation from './Components/FinalRecommendation';
+import DiseaseDetection from './Components/DiseaseDetection';
 import './App.css';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
         <Route path = "/Soil" element = {<Soil/>}/>
         <Route path = "/SeasonalPlanning" element ={<SeasonalPlanning/>} />
         <Route path = "/Forecast" element = {<Forecast/>}/>
+        <Route path = "/Detect" element = {<DiseaseDetection/>} />
+        <Route path = "/Recommendation" element = {<FinalRecommendation/>} />
 
       </Routes>
     </div>

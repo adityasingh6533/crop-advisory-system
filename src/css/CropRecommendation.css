@@ -7,12 +7,13 @@
   box-sizing: border-box;
 }
 
-/* ===== PAGE BACKGROUND ===== */
+/* ===== PAGE BACKGROUND – card centered in viewport ===== */
 .crop-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px 20px;
 
   background:
     linear-gradient(
@@ -28,11 +29,12 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* ===== MAIN CARD ===== */
+/* ===== MAIN CARD – centered ===== */
 .crop-card {
   width: 100%;
   max-width: 540px;
   padding: 44px 42px;
+  flex-shrink: 0;
 
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(10px);
@@ -120,26 +122,23 @@
 }
 
 /* ===== CTA BUTTON ===== */
-.recommend-btn {
-  margin-top: 10px;
-  padding: 14px;
-
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-
-  background: linear-gradient(135deg, #2d6a4f, #52b788);
-  color: #ffffff;
-
-  border: none;
+.view-weather-btn {
+  padding: 12px;
   border-radius: 30px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  background: transparent;
+  color: #2d6a4f;
+
+  border: 2px solid #52b788;
   cursor: pointer;
 
-  box-shadow: 0 10px 22px rgba(45, 106, 79, 0.4);
-  transition: all 0.25s ease;
+  transition: all .25s ease;
 }
 
-.recommend-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #1b4332, #40916c);
+.view-weather-btn:hover {
+  background: rgba(82,183,136,.12);
 }
+

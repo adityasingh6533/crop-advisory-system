@@ -5,6 +5,7 @@ const cors = require('cors');
 const User = require('./Models/user');
 const userRouter = require('./api/user');
 const CropInputRouter = require('./api/CropInput');
+const recommendation = require('./api/recommendation.js')
 require("dotenv").config();
 const app= express();
 
@@ -16,8 +17,9 @@ app.use('/api/user', userRouter);
 app.use('/api/cropInput', CropInputRouter);
 
 app.use("/api/weather", currentWeather);
+app.use("/api/recommendation", recommendation);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5002;
 
 const {connectToMongoDB}=require('./connect');
 

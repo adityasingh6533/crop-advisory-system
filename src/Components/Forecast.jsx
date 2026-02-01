@@ -1,52 +1,132 @@
+import "../css/Weather.css";
 import "../css/Forecast.css";
+import { useEffect, useState } from "react";
+import { getWeatherForecast } from "../api/ForecastWeather";
+import { useNavigate } from "react-router-dom";
 
 const Forecast = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("CropInput");
+    if (!stored) {
+      navigate("/CropRecommendation", { replace: true });
+      return;
+    }
+
+    let location;
+    try {
+      location = JSON.parse(stored)?.location;
+    } catch {
+      navigate("/CropRecommendation", { replace: true });
+      return;
+    }
+
+    if (!location) {
+      navigate("/CropRecommendation", { replace: true });
+      return;
+    }
+
+    const run = async () => {
+      try {
+        const res = await getWeatherForecast(location);
+        // 🔢 CALCULATE SUMMARY FROM TREND
+let totalTemp = 0;
+let totalRain = 0;
+let rainyDays = 0;
+let hotDays = 0;
+
+res.trend.forEach((day) => {
+  totalTemp += day.avgTemp;
+
+  const rain = parseFloat(day.rainTrend) || 0;
+  totalRain += rain;
+
+  if (rain > 5) rainyDays++;
+  if (day.avgTemp > 35) hotDays++;
+});
+
+const avgTemp = Math.round(totalTemp / res.trend.length);
+
+// 🧠 WEATHER SUMMARY (RULE INPUT)
+const weatherSummary = {
+  avgTemp,
+  totalRain: Math.round(totalRain),
+  rainyDays,
+  hotDays
+};
+
+// 💾 SAVE FOR RULE ENGINE
+sessionStorage.setItem(
+  "weatherSummary",
+  JSON.stringify(weatherSummary)
+);
+
+        setData(res);
+        setError(null);
+      } catch (e) {
+        setError(e.message || "Unable to load forecast");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    run();
+  }, [navigate]);
+
+ 
+
+  if (loading) {
+    return <h2 style={{ color: "white", textAlign: "center" }}>Loading forecast…</h2>;
+  }
+
+  if (error || !data) {
+    return (
+      <div className="weather-page">
+        <div className="weather-header">
+          <h1>Weather Forecast</h1>
+          <p style={{ color: "white" }}>{error || "Forecast unavailable"}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="weather-page">
-
-      {/* HEADER */}
       <div className="weather-header">
         <h1>Weather Forecast</h1>
-        <p>Location: <span>Aligarh</span></p>
+        <p>Location: <b>{data.location}</b></p>
       </div>
 
-      {/* CURRENT WEATHER */}
-      <div className="weather-main-card">
-        <div className="temp-section">
-          <h2>28°C</h2>
-          <span>Partly Cloudy</span>
-        </div>
-
-        <div className="weather-meta">
-          <p><b>Humidity:</b> 65%</p>
-          <p><b>Rainfall:</b> Light</p>
-          <p><b>Wind:</b> 10 km/h</p>
-        </div>
-      </div>
-
-      {/* FORECAST */}
-      <h2 className="forecast-title">Next 7 Days Trend</h2>
+      <h2 className="forecast-title">7–14 Day Trend</h2>
 
       <div className="forecast-row">
-        <div className="day">Mon 🌧️<br />27°</div>
-        <div className="day">Tue ☁️<br />29°</div>
-        <div className="day">Wed 🌦️<br />28°</div>
-        <div className="day">Thu ☀️<br />30°</div>
-        <div className="day">Fri 🌦️<br />29°</div>
-        <div className="day">Sat 🌧️<br />27°</div>
-        <div className="day">Sun ☁️<br />28°</div>
+        {data.trend.map((d) => (
+          <div className={`day ${d.isOutlook ? "outlook" : ""}`} key={d.date}>
+            <div><b>{d.date}</b></div>
+            <div>{d.condition}</div>
+            <div>{d.avgTemp}°C</div>
+            <div>Rain: {d.rainTrend}</div>
+            {d.isOutlook && <div className="outlook-badge">Outlook</div>}
+          </div>
+        ))}
       </div>
 
-      {/* SEASONAL INSIGHT */}
       <div className="seasonal-insight">
         <h3>Seasonal Insight</h3>
-        <p>
-          Weather conditions over the next <b>7–14 days</b> indicate
-          <b> moderate rainfall</b> with stable temperatures.
-          These conditions are favorable for ongoing
-          <b> Kharif crop growth</b>.
-        </p>
+        <p>{data.insight}</p>
       </div>
+      <div className="forecast-action">
+  <button
+    className="recommend-btn"
+    onClick={() => navigate("/Recommendation")}
+  >
+    🌾 View Crop Recommendation
+  </button>
+</div>
 
     </div>
   );

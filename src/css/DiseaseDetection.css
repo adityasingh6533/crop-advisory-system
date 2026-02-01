@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+/* FULL PAGE */
+.disease-page {
+  min-height: 100vh;
+  background: 
+    linear-gradient(
+      rgba(15,32,39,0.75),
+      rgba(32,58,67,0.75),
+      rgba(44,83,100,0.75)
+    ),
+    url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");
+    
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* DARK GLASS OVERLAY */
+.overlay {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* MAIN CARD */
+.disease-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 35px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+
+  border-radius: 24px;
+  text-align: center;
+  color: #ffffff;
+
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  animation: fadeUp 0.9s ease;
+}
+
+/* TITLE */
+.disease-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.disease-subtitle {
+  font-size: 0.95rem;
+  color: #cfd8dc;
+  margin-bottom: 28px;
+}
+
+/* UPLOAD */
+.upload-box input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255,255,255,0.18);
+  border: 1px dashed rgba(255,255,255,0.4);
+  border-radius: 14px;
+  color: white;
+  cursor: pointer;
+}
+
+/* BUTTON */
+.detect-btn {
+  margin-top: 28px;
+  padding: 14px 26px;
+
+  background: linear-gradient(135deg, #52b788, #2d6a4f);
+  border: none;
+  border-radius: 30px;
+
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(82,183,136,0.45);
+}
+
+.detect-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #40916c, #1b4332);
+}
+
+/* NOTE */
+.note {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: #b0bec5;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -39,7 +39,6 @@ const Weather = () => {
         setError(null);
       } catch (err) {
         console.error(err);
-        // Show more useful backend/API error details
         setError(err.message || "Failed to load weather data. Please try again.");
       } finally {
         setLoading(false);
@@ -50,7 +49,7 @@ const Weather = () => {
   }, [navigate]);
 
   if (loading) {
-    return <h2 style={{ color: "white", textAlign: "center" }}>Loading weather...</h2>;
+    return <h2 style={{ color: "skyblue", textAlign: "center" }}>Loading weather...</h2>;
   }
 
   if (error || !weather) {
@@ -84,7 +83,18 @@ const Weather = () => {
           <p><b>Rainfall:</b> {weather.rainfall} mm</p>
         </div>
       </div>
+      {/* 🔥 Forecast Button */}
+<div className="forecast-btn-wrapper">
+  <button
+    className="forecast-btn"
+    onClick={() => navigate("/Forecast")}
+  >
+    View 7–14 Days Forecast →
+  </button>
+</div>
+
     </div>
+    
   );
 };
 
