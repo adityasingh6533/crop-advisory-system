@@ -32,7 +32,7 @@ body.fade-out {
       rgba(16, 50, 35, 0.65),
       rgba(16, 50, 35, 0.65)
     ),
-    url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");   /* image public/images me honi chahiye */
+    url("../assets/bg-ultra.jpg");   /* image public/images me honi chahiye */
 
   background-size: cover;
   background-position: center;

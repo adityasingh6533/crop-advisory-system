@@ -216,9 +216,7 @@
 
   transition: all 0.35s ease;
  
-}
-
-.recommend-btn:hover {
+}.recommend-btn:hover {
   transform: translateY(-4px) scale(1.04);  background: linear-gradient(
     135deg,
     rgba(33, 150, 243, 0.45),

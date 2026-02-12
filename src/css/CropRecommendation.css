@@ -20,7 +20,7 @@
       rgba(16, 50, 35, 0.75),
       rgba(16, 50, 35, 0.75)
     ),
-    url("C:\\Users\\adity\\Downloads\\home1.jpg.jpg");
+    url("../assets/bg-ultra.jpg");
 
   background-size: cover;
   background-position: center;
@@ -123,22 +123,23 @@
 
 /* ===== CTA BUTTON ===== */
 .view-weather-btn {
-  padding: 12px;
-  border-radius: 30px;
+ background: linear-gradient(135deg, #2d6a4f, #52b788);
+  color: #ffffff;
 
-  font-size: 14px;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 30px;
+
+  font-size: 1rem;
   font-weight: 600;
 
-  background: transparent;
-  color: #2d6a4f;
-
-  border: 2px solid #52b788;
   cursor: pointer;
-
-  transition: all .25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
 }
 
 .view-weather-btn:hover {
-  background: rgba(82,183,136,.12);
+  background: linear-gradient(135deg, #1b4332, #40916c);
+  transform: translateY(-2px);
 }
 
