@@ -1,0 +1,43 @@
+.lang-page {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../assets/bg-ultra.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.lang-overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.45);   /* dark overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.lang-buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.lang-buttons button {
+  padding: 14px 36px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: #2e7d32;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.lang-buttons button:hover {
+  background: #1b5e20;
+}

@@ -1,178 +1,142 @@
 /* ===== GLOBAL RESET ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* ===== BODY TRANSITION ===== */
 body {
-  font-family: 'Inter', sans-serif;
-  opacity: 1;
-  transition: opacity 0.4s ease;
-  overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    /* overflow: hidden;  <-- Isko hata diya taaki scroll ho sake agar screen choti ho */
+    background-color: #f4f4f4; 
 }
 
 body.fade-out {
-  opacity: 0;
+    opacity: 0;
 }
 
 /* ===== MAIN CONTAINER (BACKGROUND) ===== */
 .MainContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  min-height: 100vh;      /* height nahi, min-height */
-  padding: 40px 0;       /* 🔥 upar-neeche breathing space */
-
-  background:
-    linear-gradient(
-      rgba(16, 50, 35, 0.65),
-      rgba(16, 50, 35, 0.65)
-    ),
-    url("../assets/bg-ultra.jpg");
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px; /* Side se space dene ke liye */
+    background: linear-gradient( rgba(16, 50, 35, 0.65), rgba(16, 50, 35, 0.65) ), url("../assets/bg-ultra.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Background ko stick karne ke liye */
 }
-
 
 /* ===== SIGNUP CARD (PREMIUM GLASS LOOK) ===== */
 .signupPage {
- 
-  width: 120%;
-  max-width: 440px;
-
-  padding: 32px 36px;    /* 🔥 padding kam */
-  margin: 0;             /* ❌ extra margin hatao */
-
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-
-  height: auto;
-  overflow: visible;
+    width: 90%; /* 120% se hata kar 90% kiya taaki side se visible ho */
+    max-width: 420px; 
+    padding: 25px 30px; /* Padding thodi kam ki taaki height manage ho */
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    height: auto;
+    animation: fadeUp 0.6s ease-out; /* Animation add ki */
 }
 
 /* ===== ENTRY ANIMATION ===== */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== HEADING ===== */
 .signupPage h1 {
-  text-align: center;
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #1b4332;
-  margin-bottom: 6px;
+    text-align: center;
+    font-size: 1.7rem; /* Thoda chota kiya */
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 4px;
 }
 
 /* ===== TAGLINE ===== */
 .tagline {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #6c757d;
-  margin-bottom: 22px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 15px;
 }
 
 /* ===== INPUT FIELDS ===== */
 .signupPage input {
-  width: 100%;
-  padding: 15px 18px;
-  margin: 12px 0;
-
-  font-size: 0.95rem;
-  border-radius: 12px;
-  border: 1px solid #dcdcdc;
-
-  background: #f9fdfb;
-  transition: all 0.25s ease;
+    width: 100%;
+    padding: 12px 15px; /* Input ki height thodi kam ki */
+    margin: 8px 0; /* Inputs ke beech ka gap kam kiya */
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    background: #f9fdfb;
+    transition: all 0.25s ease;
 }
 
 .signupPage input:focus {
-  outline: none;
-  border-color: #2d6a4f;
-  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+    outline: none;
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
 }
 
 /* ===== CREATE ACCOUNT BUTTON ===== */
 button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 18px;
-
-  font-size: 1rem;
-  font-weight: 600;
-
-  color: #ffffff;
-  background: linear-gradient(135deg, #2d6a4f, #52b788);
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-
-  box-shadow: 0 10px 22px rgba(45, 106, 79, 0.35);
-  transition: all 0.3s ease;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2d6a4f, #52b788);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(45, 106, 79, 0.3);
+    transition: all 0.3s ease;
 }
 
 button:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #1b4332, #40916c);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #1b4332, #40916c);
 }
 
 /* ===== BOTTOM ACCOUNT BOX ===== */
 .account-box {
-  margin-top: 26px;
-  padding-top: 18px;
-  border-top: 1px solid #e5e7eb;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .account-box p {
-  font-size: 0.9rem;
-  color: #495057;
-  margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 8px;
 }
 
 /* ===== SIGNIN BUTTON ===== */
 .signin-btn {
-  padding: 6px 18px;
-  font-size: 0.85rem;
-  font-weight: 600;
-
-  background: transparent;
-  color: #2d6a4f;
-
-  border: 1px solid #2d6a4f;
-  border-radius: 20px;
-  cursor: pointer;
+    padding: 6px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: transparent;
+    color: #2d6a4f;
+    border: 1px solid #2d6a4f;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .signin-btn:hover {
-  background: #2d6a4f;
-  color: #ffffff;
-}
-
-/* ===== SAFETY ===== */
-.createacc {
-  position: relative;
-  z-index: 10;
+    background: #2d6a4f;
+    color: #ffffff;
 }

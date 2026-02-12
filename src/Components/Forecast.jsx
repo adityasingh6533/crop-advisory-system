@@ -4,6 +4,35 @@ import { useEffect, useState } from "react";
 import { getWeatherForecast } from "../api/ForecastWeather";
 import { useNavigate } from "react-router-dom";
 
+// Language Rule
+const lang = localStorage.getItem("lang") || "en";
+
+// UI Text (Hindi / English)
+const text = {
+  en: {
+    loading: "Loading forecast...",
+    heading: "Weather Forecast",
+    unavailable: "Forecast unavailable",
+    location: "Location",
+    trendTitle: "7–14 Day Trend",
+    rain: "Rain",
+    outlook: "Outlook",
+    insight: "Seasonal Insight",
+    btnRecommendation: "🌾 View Crop Recommendation"
+  },
+  hi: {
+    loading: "पूर्वानुमान लोड हो रहा है...",
+    heading: "मौसम का पूर्वानुमान",
+    unavailable: "पूर्वानुमान उपलब्ध नहीं है",
+    location: "स्थान",
+    trendTitle: "7-14 दिनों का रुझान",
+    rain: "बारिश",
+    outlook: "संभावना",
+    insight: "मौसमी जानकारी (Insight)",
+    btnRecommendation: "🌾 फसल अनुशंसा देखें"
+  }
+};
+
 const Forecast = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -33,42 +62,35 @@ const Forecast = () => {
     const run = async () => {
       try {
         const res = await getWeatherForecast(location);
+        
         // 🔢 CALCULATE SUMMARY FROM TREND
-let totalTemp = 0;
-let totalRain = 0;
-let rainyDays = 0;
-let hotDays = 0;
+        let totalTemp = 0;
+        let totalRain = 0;
+        let rainyDays = 0;
+        let hotDays = 0;
 
-res.trend.forEach((day) => {
-  totalTemp += day.avgTemp;
+        res.trend.forEach((day) => {
+          totalTemp += day.avgTemp;
+          const rain = parseFloat(day.rainTrend) || 0;
+          totalRain += rain;
+          if (rain > 5) rainyDays++;
+          if (day.avgTemp > 35) hotDays++;
+        });
 
-  const rain = parseFloat(day.rainTrend) || 0;
-  totalRain += rain;
+        const avgTemp = Math.round(totalTemp / res.trend.length);
 
-  if (rain > 5) rainyDays++;
-  if (day.avgTemp > 35) hotDays++;
-});
+        const weatherSummary = {
+          avgTemp,
+          totalRain: Math.round(totalRain),
+          rainyDays,
+          hotDays
+        };
 
-const avgTemp = Math.round(totalTemp / res.trend.length);
-
-// 🧠 WEATHER SUMMARY (RULE INPUT)
-const weatherSummary = {
-  avgTemp,
-  totalRain: Math.round(totalRain),
-  rainyDays,
-  hotDays
-};
-
-// 💾 SAVE FOR RULE ENGINE
-sessionStorage.setItem(
-  "weatherSummary",
-  JSON.stringify(weatherSummary)
-);
-
+        sessionStorage.setItem("weatherSummary", JSON.stringify(weatherSummary));
         setData(res);
         setError(null);
       } catch (e) {
-        setError(e.message || "Unable to load forecast");
+        setError(e.message || (lang === "hi" ? "पूर्वानुमान लोड करने में असमर्थ" : "Unable to load forecast"));
       } finally {
         setLoading(false);
       }
@@ -77,18 +99,16 @@ sessionStorage.setItem(
     run();
   }, [navigate]);
 
- 
-
   if (loading) {
-    return <h2 style={{ color: "white", textAlign: "center" }}>Loading forecast…</h2>;
+    return <h2 style={{ color: "white", textAlign: "center" }}>{text[lang].loading}</h2>;
   }
 
   if (error || !data) {
     return (
       <div className="weather-page">
         <div className="weather-header">
-          <h1>Weather Forecast</h1>
-          <p style={{ color: "white" }}>{error || "Forecast unavailable"}</p>
+          <h1>{text[lang].heading}</h1>
+          <p style={{ color: "white" }}>{error || text[lang].unavailable}</p>
         </div>
       </div>
     );
@@ -97,11 +117,11 @@ sessionStorage.setItem(
   return (
     <div className="weather-page">
       <div className="weather-header">
-        <h1>Weather Forecast</h1>
-        <p>Location: <b>{data.location}</b></p>
+        <h1>{text[lang].heading}</h1>
+        <p>{text[lang].location}: <b>{data.location}</b></p>
       </div>
 
-      <h2 className="forecast-title">7–14 Day Trend</h2>
+      <h2 className="forecast-title">{text[lang].trendTitle}</h2>
 
       <div className="forecast-row">
         {data.trend.map((d) => (
@@ -109,25 +129,25 @@ sessionStorage.setItem(
             <div><b>{d.date}</b></div>
             <div>{d.condition}</div>
             <div>{d.avgTemp}°C</div>
-            <div>Rain: {d.rainTrend}</div>
-            {d.isOutlook && <div className="outlook-badge">Outlook</div>}
+            <div>{text[lang].rain}: {d.rainTrend}</div>
+            {d.isOutlook && <div className="outlook-badge">{text[lang].outlook}</div>}
           </div>
         ))}
       </div>
 
       <div className="seasonal-insight">
-        <h3>Seasonal Insight</h3>
+        <h3>{text[lang].insight}</h3>
         <p>{data.insight}</p>
       </div>
-      <div className="forecast-action">
-  <button
-    className="recommend-btn"
-    onClick={() => navigate("/Recommendation")}
-  >
-    🌾 View Crop Recommendation
-  </button>
-</div>
 
+      <div className="forecast-action">
+        <button
+          className="recommend-btn"
+          onClick={() => navigate("/Recommendation")}
+        >
+          {text[lang].btnRecommendation}
+        </button>
+      </div>
     </div>
   );
 };
