@@ -93,18 +93,6 @@ const Dashboard = () => {
           </div>
 
           <div className="action-card">
-            <button onClick={() => window.location.href = '/SeasonalPlanning'}>
-              {text[lang].btnPlanning}
-            </button>
-          </div>
-
-          <div className="action-card">
-            <button onClick={() => window.location.href = '/Soil'}>
-              {text[lang].btnSoil}
-            </button>
-          </div>
-
-          <div className="action-card">
             <button onClick={() => window.location.href = '/Detect'}>
               {text[lang].btnDisease}
             </button>

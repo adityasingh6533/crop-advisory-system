@@ -8,8 +8,6 @@ import SignUp from './Components/SignUp';
 import Dashboard from './Components/Dashboard';
 import CropRecommendation from './Components/CropRecommendation';
 import Weather from './Components/Weather';
-import Soil from './Components/Soil';
-import SeasonalPlanning from './Components/CropPlanning';
 import Forecast from './Components/Forecast';
 import FinalRecommendation from './Components/FinalRecommendation';
 import DiseaseDetection from './Components/DiseaseDetection';
@@ -40,13 +38,6 @@ function App() {
         />
 
         <Route path="/weather" element={lang ? <Weather /> : <Navigate to="/" />} />
-
-        <Route path="/soil" element={lang ? <Soil /> : <Navigate to="/" />} />
-
-        <Route
-          path="/seasonalplanning"
-          element={lang ? <SeasonalPlanning /> : <Navigate to="/" />}
-        />
 
         <Route path="/forecast" element={lang ? <Forecast /> : <Navigate to="/" />} />
 

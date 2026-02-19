@@ -1,38 +1,157 @@
-import "../css/DiseaseDetection.css";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/DiseaseDetection.css";
+import { detectDisease } from "../api/diseaseApi";
+import { getRecommendation } from "../api/leafKnowledge";
+
+const text = {
+  en: {
+    title: "Crop Disease Detection",
+    subtitle: "Upload a leaf image to detect crop disease using AI",
+    uploadFirst: "Upload image first",
+    analyzing: "Analyzing...",
+    analyze: "Analyze Disease",
+    note: "Supported: 14 crops, 38 classes (diseases + healthy leaves)",
+    predicted: "Predicted Disease",
+    confidence: "Confidence",
+    cause: "Cause",
+    treatment: "Treatment",
+    prevention: "Prevention",
+    analyzeAnother: "Analyze Another Image",
+    continue: "Continue - Weather Advisory",
+    predictionFailed: "Prediction failed",
+  },
+  hi: {
+    title: "फसल रोग पहचान",
+    subtitle: "पत्ते की फोटो अपलोड करें और AI से रोग पहचानें",
+    uploadFirst: "पहले इमेज अपलोड करें",
+    analyzing: "जांच हो रही है...",
+    analyze: "रोग जांचें",
+    note: "14 फसलें, 38 प्रकार के रोग समर्थित",
+    predicted: "पहचाना गया रोग",
+    confidence: "विश्वसनीयता",
+    cause: "कारण",
+    treatment: "उपचार",
+    prevention: "बचाव",
+    analyzeAnother: "नई इमेज जांचें",
+    continue: "आगे बढ़ें - मौसम सलाह",
+    predictionFailed: "पूर्वानुमान विफल",
+  },
+};
 
 const DiseaseDetection = () => {
   const navigate = useNavigate();
+  const lang = localStorage.getItem("lang") === "hi" ? "hi" : "en";
+  const t = text[lang];
+
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [prediction, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleUpload = (e) => {
+    const selected = e.target.files?.[0];
+    if (!selected) return;
+
+    setFile(selected);
+    setPreview(URL.createObjectURL(selected));
+    setPrediction(null);
+  };
+
+  const analyze = async () => {
+    if (!file) {
+      alert(t.uploadFirst);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const result = await detectDisease(file);
+      const rec = getRecommendation(result.label, lang);
+
+      setPrediction({
+        label: result.label,
+        confidence: Number(result.confidence || 0).toFixed(2),
+        cause: rec?.title || result.label,
+        treatment: rec?.management || [],
+        prevention: rec?.prevention || [],
+      });
+    } catch (error) {
+      alert(error?.message || t.predictionFailed);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="disease-page">
       <div className="overlay">
-
         <div className="disease-card">
-          <h1 className="disease-title">Crop Disease Detection</h1>
-          <p className="disease-subtitle">
-            Upload a leaf image to detect crop disease using AI
-          </p>
+          {!prediction && (
+            <>
+              <h1 className="disease-title">{t.title}</h1>
+              <p className="disease-subtitle">{t.subtitle}</p>
 
-          <div className="upload-box">
-            <input type="file" accept="image/*" />
-          </div>
+              <div className="upload-box">
+                <input type="file" accept="image/*" onChange={handleUpload} />
+              </div>
 
-          <button
-            className="detect-btn"
-            onClick={() => navigate("/Weather")}
-          >
-            Analyze Disease
-          </button>
+              {preview && (
+                <div className="preview">
+                  <img src={preview} alt="preview" />
+                </div>
+              )}
 
-          <p className="note">
-            Supported: Tomato, Potato, Apple, Corn leaves
-          </p>
+              <button className="detect-btn" onClick={analyze} disabled={loading}>
+                {loading ? t.analyzing : t.analyze}
+              </button>
+
+              <p className="note">{t.note}</p>
+            </>
+          )}
+
+          {prediction && (
+            <div className="result-ui">
+              <h2 className="result-heading">{t.predicted}</h2>
+              <h1 className="result-disease">{prediction.label}</h1>
+              <p className="confidence">
+                {t.confidence}: {prediction.confidence}%
+              </p>
+
+              <div className="treatment-box">
+                <h3>{t.cause}</h3>
+                <p>{prediction.cause}</p>
+
+                <h3>{t.treatment}</h3>
+                <ul>
+                  {prediction.treatment.map((tip, i) => (
+                    <li key={i}>{tip}</li>
+                  ))}
+                </ul>
+
+                <h3>{t.prevention}</h3>
+                <ul>
+                  {prediction.prevention.map((tip, i) => (
+                    <li key={i}>{tip}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="actions">
+                <button className="detect-btn" onClick={() => setPrediction(null)}>
+                  {t.analyzeAnother}
+                </button>
+                <button className="next-btn" onClick={() => navigate("/weather")}>
+                  {t.continue}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
       </div>
     </div>
   );
 };
 
 export default DiseaseDetection;
+

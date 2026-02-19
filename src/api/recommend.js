@@ -1,4 +1,4 @@
-// Backend route is POST /api/recommendation/recommend
+
 const BASE_URL = "http://localhost:5002/api/recommendation/recommend";
 
 export const getCropRecommendation = async (payload) => {

@@ -8,7 +8,7 @@ export const getCurrentWeather = async (location) => {
     try {
       details = await response.text();
     } catch {
-      // ignore
+      
     }
     throw new Error(`Failed to fetch weather data (HTTP ${response.status})${details ? `: ${details}` : ""}`);
   }
