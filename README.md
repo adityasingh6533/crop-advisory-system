@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌾 Crop Recommendation & Sowing Advisory (Rule-Based Agronomy Engine)
 
-## Available Scripts
+Along with disease detection, the system provides intelligent crop sowing advice based on environmental conditions.
 
-In the project directory, you can run:
+This module does not rely on machine learning.  
+Instead, it uses **agronomic rules derived from agricultural practices** to produce reliable recommendations.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Inputs Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The advisory considers multiple real-world farming parameters:
 
-### `npm test`
+- Season (Kharif / Rabi / Zaid)
+- Soil Type
+- Irrigation Type (Rainfed / Irrigated)
+- 14-Day Weather Forecast
+  - Average Temperature
+  - Rainfall Amount
+  - Hot Days / Cold Days
+  - Rain Distribution
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### Decision Logic
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The system evaluates whether sowing is safe or risky using threshold-based agricultural rules.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Examples:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Extreme temperature → delay sowing
+- Low rainfall + rainfed farming → high risk
+- Continuous hot days → heat stress advisory
+- Suitable soil moisture → sow now
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Output
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The module produces a structured advisory instead of a simple yes/no:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Sowing Decision (Sow Now / Delay Sowing)
+- Risk Level (Low / Moderate / High)
+- Recommended Crop Category
+- Action Plan (what farmer should do next)
+- Reasons behind the decision
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### Why Rule-Based Instead of ML?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Agriculture decisions depend on well-established domain knowledge.  
+Using deterministic agronomic rules ensures:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Stability across regions
+- Explainable output
+- No dependency on large historical datasets
+- Consistent behavior in real-world conditions
 
-### Code Splitting
+This makes the system more trustworthy for farmers.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Download Model Link - https://drive.google.com/file/d/1EUVq695L63d1wbecpNyHkgBZwsEVTlkd/view?usp=sharing 
+---
 
-### Analyzing the Bundle Size
+### Role in Overall System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The project combines three layers:
 
-### Making a Progressive Web App
+1. Weather Analysis → checks environmental suitability
+2. Crop Advisory Engine → decides sowing strategy
+3. AI Disease Detection → monitors crop health
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Together they form a **complete crop decision support platform**.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
