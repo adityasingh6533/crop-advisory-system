@@ -5,18 +5,7 @@ const isLocalHost = (hostname) =>
   hostname === "127.0.0.1" ||
   hostname === "[::1]";
 
-const getBrowserOrigin = () => {
-  if (typeof window === "undefined") {
-    return "";
-  }
-
-  const { protocol, host, hostname } = window.location;
-  if (isLocalHost(hostname)) {
-    return "";
-  }
-
-  return `${protocol}//${host}`;
-};
+const PRODUCTION_API_FALLBACK = "https://crop-advisory-backend.onrender.com";
 
 export const getApiBaseUrl = () => {
   const value = process.env.REACT_APP_API_BASE_URL;
@@ -24,12 +13,11 @@ export const getApiBaseUrl = () => {
     return trimTrailingSlash(value);
   }
 
-  const browserOrigin = getBrowserOrigin();
-  if (browserOrigin) {
-    return trimTrailingSlash(browserOrigin);
+  if (typeof window !== "undefined" && isLocalHost(window.location.hostname)) {
+    return "http://localhost:5002";
   }
 
-  return "http://localhost:5002";
+  return PRODUCTION_API_FALLBACK;
 };
 
 export const getMlApiBaseUrl = () => {
