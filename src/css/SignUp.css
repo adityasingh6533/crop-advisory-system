@@ -28,7 +28,7 @@ body.fade-out {
     background: linear-gradient( rgba(16, 50, 35, 0.65), rgba(16, 50, 35, 0.65) ), url("../assets/bg-ultra.jpg");
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; 
+    background-attachment: scroll; 
 }
 
 
@@ -139,4 +139,33 @@ button:hover {
 .signin-btn:hover {
     background: #2d6a4f;
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .MainContainer {
+        align-items: flex-start;
+        padding: 14px 12px 24px;
+    }
+
+    .signupPage {
+        width: 100%;
+        max-width: 520px;
+        padding: 22px 16px;
+        margin-top: 10px;
+    }
+
+    .signupPage h1 {
+        font-size: 1.45rem;
+    }
+
+    .tagline {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .signupPage input {
+        font-size: 0.88rem;
+        padding: 11px 12px;
+    }
 }

@@ -8,7 +8,8 @@
 body {
   font-family: 'Inter', sans-serif;
   transition: all 0.5s ease;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 
@@ -23,8 +24,8 @@ body.fade-out {
   justify-content: center;
   align-items: center;
 
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
   padding: 20px;
 
   background:
@@ -160,5 +161,37 @@ button.signup-btn:hover {
   text-align: center;
   font-size: 0.9rem;
   color: #495057;
+}
+
+@media (max-width: 768px) {
+  .MainContainer {
+    align-items: flex-start;
+    padding: 16px 12px 24px;
+  }
+
+  .LoginPage {
+    margin-top: 16px;
+    padding: 30px 18px;
+    border-radius: 14px;
+  }
+
+  .LoginPage h2 {
+    font-size: 1.5rem;
+  }
+
+  .LoginPage pre {
+    font-size: 0.78rem;
+    white-space: pre-wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .LoginPage input {
+    padding: 13px 14px;
+  }
+
+  .LoginPage button {
+    padding: 13px;
+  }
 }
 

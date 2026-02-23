@@ -7,7 +7,7 @@
 
 .home-container {
   min-height: 100vh;
-  padding: 90px 40px;
+  padding: 90px 40px 130px;
 
   background:
     linear-gradient(
@@ -145,5 +145,67 @@
 .get-started-button:hover {
   transform: translateY(-4px) scale(1.03);
   background: linear-gradient(135deg, #1b4332, #40916c);
+}
+
+@media (max-width: 1024px) {
+  .h1 {
+    font-size: 2.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 70px 18px 120px;
+  }
+
+  .h1 {
+    font-size: 2.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .points {
+    margin: 30px auto;
+  }
+
+  .points li {
+    padding: 18px 16px 18px 52px;
+    font-size: 0.98rem;
+    margin-bottom: 14px;
+  }
+
+  .points li::after {
+    left: 14px;
+  }
+
+  .get-started-button {
+    position: fixed;
+    right: 14px;
+    left: 14px;
+    bottom: 14px;
+    width: auto;
+    max-width: none;
+    padding: 14px 12px;
+    z-index: 20;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 56px 12px 112px;
+  }
+
+  .h1 {
+    font-size: 1.75rem;
+  }
+
+  .points li {
+    border-radius: 14px;
+    font-size: 0.94rem;
+  }
 }
 

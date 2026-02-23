@@ -56,6 +56,22 @@
   box-shadow: 0 14px 30px rgba(0,0,0,0.25);
 }
 
+.user-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.24);
+}
+
 .username {
   font-size: 1.2rem;
   font-weight: 700;
@@ -112,6 +128,24 @@
   margin-top: 40px;
 }
 
+.action-card button {
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+}
+
+.action-card button:hover {
+  background: linear-gradient(135deg, #1b4332, #40916c);
+  transform: translateY(-2px);
+}
+
 
 .main-btn {
   background: linear-gradient(135deg, #2d6a4f, #52b788);
@@ -151,6 +185,53 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-card {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+
+  .dashboard-heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 18px 12px;
+  }
+
+  .user-info-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .dashboard-heading {
+    font-size: 1.6rem;
+  }
+
+  .dashboard-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 26px;
+  }
+
+  .dashboard-actions {
+    gap: 12px;
+  }
+
+  .action-card {
+    width: 100%;
+  }
+
+  .action-card button {
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 0.95rem;
   }
 }
 

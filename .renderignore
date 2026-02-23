@@ -1,0 +1,5 @@
+ML/
+venv/
+__pycache__/
+*.h5
+requirements.txt
