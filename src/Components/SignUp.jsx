@@ -1,9 +1,7 @@
 import "../css/SignUp.css";
 import { createUser } from "../api/userApi";
 
-
 const lang = localStorage.getItem("lang") || "en";
-
 
 const text = {
   en: {
@@ -21,7 +19,8 @@ const text = {
     allRequired: "All fields are required!",
     passMismatch: "Passwords do not match!",
     success: "Account created successfully!",
-    error: "Error creating account: "
+    error: "Error creating account: ",
+    inputMissing: "Input elements are not available. Please refresh and try again.",
   },
   hi: {
     heading: "अपना खाता बनाएं",
@@ -38,115 +37,97 @@ const text = {
     allRequired: "सभी फ़ील्ड भरना अनिवार्य है!",
     passMismatch: "पासवर्ड मेल नहीं खा रहे हैं!",
     success: "खाता सफलतापूर्वक बन गया!",
-    error: "खाता बनाने में त्रुटि: "
-  }
+    error: "खाता बनाने में त्रुटि: ",
+    inputMissing: "Input elements available nahi hain. Refresh karke phir try karein.",
+  },
 };
 
+const copy = text[lang] || text.en;
+
+const getInputValue = (selector) => {
+  const element = document.querySelector(selector);
+  return element ? element.value.trim() : null;
+};
 
 const handleCreateAccount = async () => {
-  const firstName = document.querySelector('.FirstName1').value;
-  const lastName = document.querySelector('.LastName1').value;
-  const email = document.querySelector('.Email1').value;
-  const username = document.querySelector('.UserName1').value;
-  const password = document.querySelector('.Password1').value;
-  const reenteredPassword = document.querySelector('.Password2').value;
-
-  if (!firstName || !email || !username || !password) {
-    alert(text[lang].allRequired);
-    return;
-  }
-
-  if (password !== reenteredPassword) {
-    alert(text[lang].passMismatch);
-    return;
-  }
-
-  const userData = {
-    firstName,
-    lastName,
-    Email: email,      
-    username,
-    password
-  };
-
   try {
-    const response = await createUser(userData);
-    console.log("User created successfully:", response);
+    const firstName = getInputValue(".FirstName1");
+    const lastName = getInputValue(".LastName1") || "";
+    const email = getInputValue(".Email1");
+    const username = getInputValue(".UserName1");
+    const password = getInputValue(".Password1");
+    const reenteredPassword = getInputValue(".Password2");
 
-    alert(text[lang].success);
-    window.location.href = "/Signin";
+    if (
+      firstName === null ||
+      email === null ||
+      username === null ||
+      password === null ||
+      reenteredPassword === null
+    ) {
+      alert(copy.inputMissing);
+      return;
+    }
 
+    if (!firstName || !email || !username || !password) {
+      alert(copy.allRequired);
+      return;
+    }
+
+    if (password !== reenteredPassword) {
+      alert(copy.passMismatch);
+      return;
+    }
+
+    const userData = {
+      firstName,
+      lastName,
+      Email: email,
+      username,
+      password,
+    };
+
+    await createUser(userData);
+
+    alert(copy.success);
+    window.location.href = "/signin";
   } catch (error) {
     console.error("Error creating user:", error);
-    alert(text[lang].error + error.message);
+    alert(copy.error + (error?.message || "Unknown error"));
   }
 };
-
 
 const SignUp = () => {
   return (
     <div className="MainContainer">
       <div className="signupPage">
+        <h1>{copy.heading}</h1>
+        <p className="tagline">{copy.tagline}</p>
 
-        <h1>{text[lang].heading}</h1>
-        <p className="tagline">{text[lang].tagline}</p>
+        <input type="text" placeholder={copy.firstName} className="FirstName1" />
 
-        <input
-          type="text"
-          placeholder={text[lang].firstName}
-          className="FirstName1"
-        />
+        <input type="text" placeholder={copy.lastName} className="LastName1" />
 
-        <input
-          type="text"
-          placeholder={text[lang].lastName}
-          className="LastName1"
-        />
+        <input type="email" placeholder={copy.email} className="Email1" />
 
-        <input
-          type="email"
-          placeholder={text[lang].email}
-          className="Email1"
-        />
+        <input type="text" placeholder={copy.username} className="UserName1" />
 
-        <input
-          type="text"
-          placeholder={text[lang].username}
-          className="UserName1"
-        />
+        <input type="password" placeholder={copy.password} className="Password1" />
 
-        <input
-          type="password"
-          placeholder={text[lang].password}
-          className="Password1"
-        />
+        <input type="password" placeholder={copy.rePassword} className="Password2" />
 
-        <input
-          type="password"
-          placeholder={text[lang].rePassword}
-          className="Password2"
-        />
-
-        <button
-          type="button"
-          className="create-account"
-          onClick={handleCreateAccount}
-        >
-          {text[lang].createBtn}
+        <button type="button" className="create-account" onClick={handleCreateAccount}>
+          {copy.createBtn}
         </button>
 
         <div className="account-box">
           <p>
-            {text[lang].already}{" "}
-            <button
-              className="signin-btn"
-              onClick={() => window.location.href = "/Signin"}
-            >
-              {text[lang].signInBtn}
+            {copy.already}{" "}
+            <button className="signin-btn" onClick={() => (window.location.href = "/signin")}>
+              {copy.signInBtn}
             </button>
           </p>
         </div>
-
       </div>
     </div>
   );

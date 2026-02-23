@@ -1,9 +1,7 @@
 import "../css/SignIn.css";
 import { signIn } from "../api/userApi";
 
-
 const lang = localStorage.getItem("lang") || "en";
-
 
 const text = {
   en: {
@@ -16,7 +14,8 @@ const text = {
     signUpBtn: "Sign Up",
     emptyAlert: "Both email/username and password are required!",
     success: "Sign-in successful! Welcome ",
-    failed: "Sign-in failed: "
+    failed: "Sign-in failed: ",
+    inputMissing: "Input elements are not available. Please refresh and try again.",
   },
   hi: {
     heading: "अपनी फसल सलाह प्राप्त करें",
@@ -28,84 +27,85 @@ const text = {
     signUpBtn: "साइन अप करें",
     emptyAlert: "यूज़रनेम/ईमेल और पासवर्ड दोनों आवश्यक हैं!",
     success: "साइन इन सफल! स्वागत है ",
-    failed: "साइन इन असफल: "
-  }
+    failed: "साइन इन असफल: ",
+    inputMissing: "Input elements available nahi hain. Refresh karke phir try karein.",
+  },
 };
 
+const copy = text[lang] || text.en;
 
 const HandleSignIn = async () => {
-  const credential = document.getElementById("text1").value;
-  const password = document.getElementById("password1").value;
-
-  if (!credential || !password) {
-    alert(text[lang].emptyAlert);
-    return;
-  }
-
   try {
+    const credentialInput = document.getElementById("text1");
+    const passwordInput = document.getElementById("password1");
+
+    if (!credentialInput || !passwordInput) {
+      alert(copy.inputMissing);
+      return;
+    }
+
+    const credential = credentialInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!credential || !password) {
+      alert(copy.emptyAlert);
+      return;
+    }
+
     const response = await signIn({ credential, password });
 
-    alert(text[lang].success + response.user.FirstName);
-
+    alert(copy.success + response.user.FirstName);
     sessionStorage.setItem("user", JSON.stringify(response.user));
-    window.location.href = "/Dashboard";
-
+    window.location.href = "/dashboard";
   } catch (error) {
-    alert(text[lang].failed + error.message);
+    alert(copy.failed + (error?.message || "Unknown error"));
   }
 };
-
 
 const SignIn = () => {
   return (
     <div className="MainContainer">
       <div className="LoginPage">
-
-        <h2>{text[lang].heading}</h2>
-        <pre>{text[lang].subtext}</pre>
+        <h2>{copy.heading}</h2>
+        <pre>{copy.subtext}</pre>
 
         <br />
 
         <input
           type="text"
           id="text1"
-          placeholder={text[lang].userPlaceholder}
+          placeholder={copy.userPlaceholder}
           className="Username"
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="password"
           id="password1"
-          placeholder={text[lang].passPlaceholder}
+          placeholder={copy.passPlaceholder}
           className="Password"
         />
 
-        <br /><br />
+        <br />
+        <br />
 
-        <button
-          type="button"
-          className="sign-in"
-          onClick={HandleSignIn}
-        >
-          {text[lang].signInBtn}
+        <button type="button" className="sign-in" onClick={HandleSignIn}>
+          {copy.signInBtn}
         </button>
 
-        <br /><br />
+        <br />
+        <br />
 
         <footer>
           <p>
-            {text[lang].noAccount}{" "}
-            <button
-              className="signup-btn"
-              onClick={() => window.location.href = "/SignUp"}
-            >
-              {text[lang].signUpBtn}
+            {copy.noAccount}{" "}
+            <button className="signup-btn" onClick={() => (window.location.href = "/signup")}>
+              {copy.signUpBtn}
             </button>
           </p>
         </footer>
-
       </div>
     </div>
   );
