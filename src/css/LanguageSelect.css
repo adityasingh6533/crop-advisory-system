@@ -20,6 +20,11 @@
   text-align: center;
 }
 
+.lang-overlay h1 {
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  padding: 0 14px;
+}
+
 .lang-buttons {
   margin-top: 25px;
   display: flex;
@@ -40,4 +45,24 @@
 
 .lang-buttons button:hover {
   background: #1b5e20;
+}
+
+@media (max-width: 768px) {
+  .lang-page {
+    min-height: 100vh;
+  }
+
+  .lang-buttons {
+    width: 100%;
+    max-width: 320px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lang-buttons button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
 }

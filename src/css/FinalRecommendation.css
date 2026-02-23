@@ -200,3 +200,39 @@
   .final-rec-card { padding: 20px; }
   .final-rec-actions { flex-direction: column; }
 }
+
+@media (max-width: 768px) {
+  .final-rec-page {
+    align-items: flex-start;
+    padding: 14px 10px;
+  }
+
+  .final-rec-wrap {
+    gap: 14px;
+  }
+
+  .final-rec-card {
+    max-height: none;
+    padding: 18px 14px;
+    border-radius: 16px;
+  }
+
+  .rec-section h2 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .final-rec-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-item {
+    padding: 10px;
+  }
+
+  .rec-advisory-text, .rec-reasons-list li {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+}

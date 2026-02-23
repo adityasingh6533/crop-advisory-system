@@ -143,4 +143,41 @@
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  .crop-container {
+    align-items: flex-start;
+    padding: 16px 12px;
+  }
+
+  .crop-card {
+    max-width: 100%;
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+
+  .crop-heading {
+    font-size: 1.6rem;
+  }
+
+  .crop-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .crop-form {
+    gap: 14px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 12px 13px;
+    font-size: 0.9rem;
+  }
+
+  .view-weather-btn {
+    padding: 13px 16px;
+    width: 100%;
+  }
+}
+
 

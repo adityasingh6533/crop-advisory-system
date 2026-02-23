@@ -127,3 +127,49 @@
   font-size: 20px;
 }
 
+@media (max-width: 768px) {
+  .weather-page {
+    padding: 22px 14px;
+  }
+
+  .weather-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .weather-main-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .temp-section h2 {
+    font-size: 2.4rem;
+  }
+
+  .weather-info-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .forecast-btn-wrapper {
+    margin-top: 20px;
+  }
+
+  .forecast-btn {
+    width: 100%;
+    max-width: none;
+    padding: 13px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .temp-section h2 {
+    font-size: 2rem;
+  }
+
+  .info-card p {
+    font-size: 1.05rem;
+  }
+}
+

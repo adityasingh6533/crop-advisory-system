@@ -225,3 +225,54 @@
     0 14px 36px rgba(0, 0, 0, 0.45),
     0 0 18px rgba(144, 202, 249, 0.35);
 }
+
+@media (max-width: 768px) {
+  .weather-page {
+    padding: 24px 12px;
+  }
+
+  .weather-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .forecast-title {
+    font-size: 1.25rem;
+  }
+
+  .forecast-row {
+    gap: 10px;
+    justify-content: stretch;
+  }
+
+  .day {
+    width: calc(50% - 6px);
+    min-width: 140px;
+  }
+
+  .seasonal-insight {
+    margin-top: 28px;
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .seasonal-insight h3 {
+    font-size: 1.2rem;
+  }
+
+  .seasonal-insight p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .recommend-btn {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .day {
+    width: 100%;
+    min-width: 0;
+  }
+}
