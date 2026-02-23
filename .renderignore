@@ -1,4 +1,9 @@
 ML/
+Backend/ML/
 venv/
+Backend/venv/
 __pycache__/
 *.h5
+*.keras
+*.pt
+*.pth
