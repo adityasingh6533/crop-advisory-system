@@ -8,7 +8,7 @@ ensureDatabase()
       console.log(`Server is running on port ${PORT}`);
     });
   })
-  .catch(() => {
+  .catch((err) => {
+    console.error("Startup failed:", err);
     process.exit(1);
   });
-
