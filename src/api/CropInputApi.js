@@ -1,5 +1,7 @@
 
-const baseURL = 'http://localhost:5002/api/cropInput';
+import { getApiBaseUrl } from "./config";
+
+const baseURL = `${getApiBaseUrl()}/api/cropInput`;
 
 export const createCropInput = async (cropInputData) => {
   try {

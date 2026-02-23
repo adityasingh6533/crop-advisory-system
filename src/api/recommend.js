@@ -1,5 +1,7 @@
 
-const BASE_URL = "http://localhost:5002/api/recommendation/recommend";
+import { getApiBaseUrl } from "./config";
+
+const BASE_URL = `${getApiBaseUrl()}/api/recommendation/recommend`;
 
 export const getCropRecommendation = async (payload) => {
   try {

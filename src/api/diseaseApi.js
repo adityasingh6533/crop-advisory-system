@@ -1,6 +1,8 @@
+import { getMlApiBaseUrl } from "./config";
+
 const envBaseUrl = process.env.REACT_APP_ML_API_URL;
 const baseUrls = [
-  envBaseUrl,
+  envBaseUrl || getMlApiBaseUrl(),
   "http://127.0.0.1:5001",
   "http://localhost:5001",
 ].filter(Boolean);
