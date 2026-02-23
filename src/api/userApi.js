@@ -1,5 +1,6 @@
-const RENDER_BACKEND_BASE = "https://crop-advisory-backend.onrender.com";
-const baseURL = `${RENDER_BACKEND_BASE}/api/user`;
+import { getApiBaseUrl } from "./config";
+
+const baseURL = `${getApiBaseUrl()}/api/user`;
 const REQUEST_TIMEOUT_MS = 20000;
 
 const fetchWithTimeout = async (url, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) => {
