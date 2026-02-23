@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/DiseaseDetection.css";
 import { detectDisease } from "../api/diseaseApi";
@@ -41,6 +41,12 @@ const text = {
 
 const DiseaseDetection = () => {
   const navigate = useNavigate();
+  
+    useEffect(() => {
+      if (!sessionStorage.getItem("user")) {
+        navigate("/SignIn");
+      }
+    }, [navigate]);
   const lang = localStorage.getItem("lang") === "hi" ? "hi" : "en";
   const t = text[lang];
 

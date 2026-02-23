@@ -9,17 +9,17 @@ const getCropRecommendation = (req, res) => {
     const { season, soilType, irrigationType, location } = cropInput;
     const { avgTemp, totalRain, hotDays = 0, coldDays = 0 } = weatherSummary;
 
-    /* ---------- STRING NORMALIZATION FIX ---------- */
+    
     const seasonN = season?.trim().toLowerCase();
     const irrigationN = irrigationType?.trim().toLowerCase();
     const soilN = soilType?.trim().toLowerCase();
 
-    /* ---------- DEMO MODE ---------- */
-    const DEMO_MODE = true; // demo ke time true, real deploy me false
+    
+    const DEMO_MODE = true; 
     const effectiveRain =
       DEMO_MODE && totalRain === 0 ? 25 : totalRain;
 
-    /* ---------- i18n ---------- */
+    
     const i18n = {
       en: {
         sow: "Conditions are suitable for sowing.",
@@ -31,10 +31,10 @@ const getCropRecommendation = (req, res) => {
         loamy: "Loamy soil is suitable.",
         sandy: "Sandy soil drains water quickly.",
         clay: "Clay soil retains moisture well.",
-        confidence: "≈85% (rule-based advisory)"
+        confidence: "~85% (rule-based advisory)"
       },
       hi: {
-        sow: "बुवाई के लिए परिस्थितियाँ अनुकूल हैं।",
+        sow: "बुवाई के लिए परिस्थितियां अनुकूल हैं।",
         delay: "मौसम जोखिम भरा है। बुवाई टालने की सलाह है।",
         tempRisk: "तापमान से जुड़ा जोखिम पाया गया।",
         rainRisk: "कम वर्षा पाई गई।",
@@ -43,13 +43,13 @@ const getCropRecommendation = (req, res) => {
         loamy: "दोमट मिट्टी उपयुक्त है।",
         sandy: "रेतीली मिट्टी में पानी जल्दी निकलता है।",
         clay: "चिकनी मिट्टी नमी रोकती है।",
-        confidence: "≈85% (नियम-आधारित सलाह)"
+        confidence: "~85% (नियम-आधारित सलाह)"
       }
     };
 
     const t = i18n[lang] || i18n.en;
 
-    /* ---------- CROP SELECTION ---------- */
+    
     let crops = [];
 
     if (seasonN === "kharif") {
@@ -78,17 +78,17 @@ const getCropRecommendation = (req, res) => {
       }
     }
 
-    /* ---------- SOIL FILTER ---------- */
+    
     if (soilN === "sandy") {
       crops = crops.filter(c => c !== "Rice" && c !== "Sugarcane");
     }
 
-    /* ---------- SAFETY FALLBACK (only if invalid season) ---------- */
+    
     if (!["kharif", "rabi", "zaid"].includes(seasonN)) {
       crops = ["Millets", "Pulses"];
     }
 
-    /* ---------- RISK SCORING ---------- */
+    
     let riskScore = 0;
     let reasons = [];
 

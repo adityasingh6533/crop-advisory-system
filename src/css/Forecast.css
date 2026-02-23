@@ -1,11 +1,11 @@
-* {
+﻿* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
 
-/* 🔥 PAGE BACKGROUND */
+
 .weather-page {
   min-height: 100vh;
   padding: 40px 20px;
@@ -21,7 +21,7 @@
   animation: bgMove 12s ease-in-out infinite alternate;
 }
 
-/* HEADER */
+
 .weather-header {
   text-align: center;
   color: #ffffff;
@@ -37,7 +37,7 @@
   font-weight: 700;
 }
 
-/* CURRENT WEATHER CARD */
+
 .weather-main-card {
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@
   margin-bottom: 6px;
 }
 
-/* FORECAST */
+
 .forecast-title {
   text-align: center;
   color: #ffffff;
@@ -109,7 +109,7 @@
   margin-top: 4px;
 }
 
-/* 🌱 SEASONAL INSIGHT — WEATHER THEME MATCHED */
+
 .seasonal-insight {
   max-width: 1200px;
   margin: 50px auto 0 auto;
@@ -136,7 +136,7 @@
   animation: fadeUp 0.9s ease;
 }
 
-/* Heading */
+
 .seasonal-insight h3 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -145,7 +145,7 @@
   letter-spacing: 0.4px;
 }
 
-/* Text */
+
 .seasonal-insight p {
   max-width: 950px;
   margin: 0 auto;
@@ -156,14 +156,14 @@
   color: #e0f2f1;
 }
 
-/* Highlight important words */
+
 .seasonal-insight strong {
   color: #b7e4c7;
   font-weight: 600;
 }
 
 
-/* ANIMATIONS */
+
 @keyframes bgMove {
   from { background-position: 0% 50%; }
   to   { background-position: 100% 50%; }
@@ -179,7 +179,7 @@
     transform: translateY(0);
   }
 }
-/* ===== FORECAST ACTION BUTTON ===== */
+
 .forecast-action {
   display: flex;
   justify-content: center;
@@ -200,7 +200,7 @@
 
   color: #e3f2fd;
 
-  /* 🔥 glass + blue gradient */
+  
   background: linear-gradient(
     135deg,
     rgba(33, 150, 243, 0.25),

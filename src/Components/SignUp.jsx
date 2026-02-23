@@ -1,10 +1,10 @@
 import "../css/SignUp.css";
 import { createUser } from "../api/userApi";
 
-/* 🔑 Language rule */
+
 const lang = localStorage.getItem("lang") || "en";
 
-/* 🌐 UI Text (Hindi / English only for UI) */
+
 const text = {
   en: {
     heading: "Create your account",
@@ -42,9 +42,7 @@ const text = {
   }
 };
 
-/* ============================================
-   Handle Create Account (LOGIC SAME)
-============================================ */
+
 const handleCreateAccount = async () => {
   const firstName = document.querySelector('.FirstName1').value;
   const lastName = document.querySelector('.LastName1').value;
@@ -66,7 +64,7 @@ const handleCreateAccount = async () => {
   const userData = {
     firstName,
     lastName,
-    Email: email,      // backend requirement – DO NOT CHANGE
+    Email: email,      
     username,
     password
   };
@@ -84,9 +82,7 @@ const handleCreateAccount = async () => {
   }
 };
 
-/* ============================================
-   React Component
-============================================ */
+
 const SignUp = () => {
   return (
     <div className="MainContainer">

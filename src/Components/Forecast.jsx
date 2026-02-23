@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { getWeatherForecast } from "../api/ForecastWeather";
 import { useNavigate } from "react-router-dom";
 
-// Language Rule
+
 const lang = localStorage.getItem("lang") || "en";
 
-// UI Text (Hindi / English)
+
 const text = {
   en: {
     loading: "Loading forecast...",
@@ -63,7 +63,7 @@ const Forecast = () => {
       try {
         const res = await getWeatherForecast(location);
         
-        // 🔢 CALCULATE SUMMARY FROM TREND
+        
         let totalTemp = 0;
         let totalRain = 0;
         let rainyDays = 0;

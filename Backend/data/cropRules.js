@@ -1,14 +1,8 @@
-/**
- * Static Crop Recommendation Rules
- * Source: Indian agronomy standards, ICAR guidelines, FAO patterns
- * Note: This is rule-based (non-ML) expert knowledge
- */
+﻿
 
 const cropRules = [
 
-  /* =========================
-     🌾 KHARIF CROPS
-  ========================= */
+  
 
   {
     crop: "Rice",
@@ -78,9 +72,7 @@ const cropRules = [
     ]
   },
 
-  /* =========================
-     🌾 RABI CROPS
-  ========================= */
+  
 
   {
     crop: "Wheat",
@@ -133,9 +125,7 @@ const cropRules = [
     ]
   },
 
-  /* =========================
-     🌾 ZAID CROPS
-  ========================= */
+  
 
   {
     crop: "Watermelon",
@@ -171,9 +161,7 @@ const cropRules = [
     ]
   },
 
-  /* =========================
-     🌱 PERENNIAL / SPECIAL
-  ========================= */
+  
 
   {
     crop: "Sugarcane",

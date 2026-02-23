@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 
-/* ===== RESET ===== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== PAGE BACKGROUND – card centered in viewport ===== */
+
 .crop-container {
   min-height: 100vh;
   display: flex;
@@ -29,7 +29,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* ===== MAIN CARD – centered ===== */
+
 .crop-card {
   width: 100%;
   max-width: 540px;
@@ -47,7 +47,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* ===== HEADING ===== */
+
 .crop-heading {
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -58,7 +58,7 @@
   margin-bottom: 6px;
 }
 
-/* ===== SUBTITLE ===== */
+
 .crop-subtitle {
   text-align: center;
   font-size: 14.5px;
@@ -68,20 +68,20 @@
   margin-bottom: 32px;
 }
 
-/* ===== FORM LAYOUT ===== */
+
 .crop-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* ===== FORM GROUP ===== */
+
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
-/* ===== LABEL ===== */
+
 .form-group label {
   font-size: 13.5px;
   font-weight: 600;
@@ -90,7 +90,7 @@
   margin-bottom: 6px;
 }
 
-/* ===== INPUT / SELECT ===== */
+
 .form-group input,
 .form-group select {
   font-family: 'Inter', sans-serif;
@@ -112,7 +112,7 @@
   font-weight: 400;
 }
 
-/* ===== FOCUS EFFECT ===== */
+
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
@@ -121,7 +121,7 @@
   background-color: #ffffff;
 }
 
-/* ===== CTA BUTTON ===== */
+
 .view-weather-btn {
  background: linear-gradient(135deg, #2d6a4f, #52b788);
   color: #ffffff;
@@ -142,4 +142,5 @@
   background: linear-gradient(135deg, #1b4332, #40916c);
   transform: translateY(-2px);
 }
+
 

@@ -3,10 +3,10 @@ import { createCropInput } from "../api/CropInputApi";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Language Rule: Storage se lang uthao
+
 const lang = localStorage.getItem("lang") || "en";
 
-// UI Text (Hindi / English)
+
 const text = {
   en: {
     heading: "Crop Recommendation",
@@ -43,7 +43,7 @@ const text = {
 const CropRecommendation = () => {
   const navigate = useNavigate();
 
-  // 🔐 Auth Guard
+  
   useEffect(() => {
     const user = sessionStorage.getItem("user");
     if (!user) {
@@ -57,7 +57,7 @@ const CropRecommendation = () => {
     const season = document.querySelectorAll('select')[1].value;
     const irrigationType = document.querySelectorAll('select')[2].value;
 
-    // Validation using dynamic text
+    
     if (
       !location ||
       soilType === text[lang].optionsSoil[0] ||

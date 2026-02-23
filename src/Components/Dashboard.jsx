@@ -3,10 +3,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Language Rule: LocalStorage se lang nikaalo ya default "en"
+
 const lang = localStorage.getItem("lang") || "en";
 
-// UI Text (Hindi / English) - Jaisa tumne image mein dikhaya tha
+
 const text = {
   en: {
     welcome: "Welcome",
@@ -46,7 +46,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-card">
-        {/* ===== USER INFO BAR ===== */}
+        {}
         <div className="user-info-bar">
           <div className="user-left">
             <div className="avatar">👤</div>
@@ -104,3 +104,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

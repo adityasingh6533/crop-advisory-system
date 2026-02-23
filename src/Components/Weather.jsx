@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { getCurrentWeather } from "../api/currentWeather";
 import { useNavigate } from "react-router-dom";
 
-// Language Rule
+
 const lang = localStorage.getItem("lang") || "en";
 
-// UI Text (Hindi / English)
+
 const text = {
   en: {
     loading: "Loading weather...",

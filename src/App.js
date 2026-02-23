@@ -15,16 +15,16 @@ import DiseaseDetection from './Components/DiseaseDetection';
 import './App.css';
 
 function App() {
-  const lang = localStorage.getItem("lang"); // 🔑 RULE
+  const lang = localStorage.getItem("lang"); 
 
   return (
     <div className="App">
       <Routes>
 
-        {/* 🔹 Entry Page */}
+        {}
         <Route path="/" element={<LanguageSelect />} />
 
-        {/* 🔹 Protected Pages */}
+        {}
         <Route path="/home" element={lang ? <Home /> : <Navigate to="/" />} />
 
         <Route path="/signin" element={lang ? <SignIn /> : <Navigate to="/" />} />
@@ -57,3 +57,4 @@ function App() {
 }
 
 export default App;
+

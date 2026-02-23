@@ -1,4 +1,4 @@
-/* ===== GLOBAL RESET ===== */
+﻿
 * {
   margin: 0;
   padding: 0;
@@ -11,13 +11,13 @@ body {
   overflow: hidden;
 }
 
-/* ===== OPTIONAL PAGE FADE ===== */
+
 body.fade-out {
   opacity: 0;
   transform: translateY(-10px);
 }
 
-/* ===== MAIN BACKGROUND ===== */
+
 .MainContainer {
   display: flex;
   justify-content: center;
@@ -32,14 +32,14 @@ body.fade-out {
       rgba(16, 50, 35, 0.65),
       rgba(16, 50, 35, 0.65)
     ),
-    url("../assets/bg-ultra.jpg");   /* image public/images me honi chahiye */
+    url("../assets/bg-ultra.jpg");   
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* ===== SIGNIN CARD (PREMIUM GLASS LOOK) ===== */
+
 .LoginPage {
   width: 100%;
   max-width: 460px;
@@ -58,7 +58,7 @@ body.fade-out {
   animation: fadeUp 0.6s ease;
 }
 
-/* ===== ENTRY ANIMATION ===== */
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -70,7 +70,7 @@ body.fade-out {
   }
 }
 
-/* ===== HEADING ===== */
+
 .LoginPage h2 {
   text-align: center;
   font-size: 1.9rem;
@@ -79,7 +79,7 @@ body.fade-out {
   margin-bottom: 10px;
 }
 
-/* ===== SUBTEXT ===== */
+
 .LoginPage pre {
   text-align: center;
   font-size: 0.85rem;
@@ -87,7 +87,7 @@ body.fade-out {
   margin-bottom: 22px;
 }
 
-/* ===== INPUT FIELDS ===== */
+
 .LoginPage input {
   width: 100%;
   padding: 15px 18px;
@@ -107,7 +107,7 @@ body.fade-out {
   box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
 }
 
-/* ===== PRIMARY SIGNIN BUTTON ===== */
+
 .LoginPage button {
   width: 100%;
   padding: 14px;
@@ -131,7 +131,7 @@ body.fade-out {
   background: linear-gradient(135deg, #1b4332, #40916c);
 }
 
-/* ===== SIGNUP SECONDARY BUTTON ===== */
+
 button.signup-btn {
   width: auto;
   margin: 16px auto 0;
@@ -154,10 +154,11 @@ button.signup-btn:hover {
   color: #ffffff;
 }
 
-/* ===== FOOTER TEXT ===== */
+
 .LoginPage p {
   margin-top: 18px;
   text-align: center;
   font-size: 0.9rem;
   color: #495057;
 }
+

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+﻿const mongoose = require('mongoose');
 const User = require('../Models/user');
 
 const createUser = async (req, res) => {
@@ -29,7 +29,7 @@ const signInUser = async (req, res) => {
         return res.status(400).json({ error: "Email/Username and password are required" });
     }
     try {
-        // Find user by either username or email
+        
         const user = await User.findOne({
             $or: [
                 { Username: body.credential },
@@ -55,3 +55,4 @@ module.exports = {
     createUser,
     signInUser
 };
+

@@ -1,5 +1,5 @@
+﻿
 
-/* ===== FORECAST BUTTON (WEATHER THEME) ===== */
 .forecast-btn-wrapper {
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@
 
   color: #e3f2fd;
 
-  /* 🔥 glass + blue gradient */
+  
   background: linear-gradient(
     135deg,
     rgba(33, 150, 243, 0.25),
@@ -36,7 +36,7 @@
   transition: all 0.35s ease;
 }
 
-/* 🔥 Hover = premium weather app feel */
+
 .forecast-btn:hover {
   transform: translateY(-4px) scale(1.04);
 
@@ -126,3 +126,4 @@
   margin-top: 10px;
   font-size: 20px;
 }
+

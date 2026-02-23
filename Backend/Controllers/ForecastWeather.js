@@ -1,4 +1,4 @@
-const getWeatherForecast = async (req, res) => {
+﻿const getWeatherForecast = async (req, res) => {
   try {
     const { location } = req.query;
 
@@ -22,7 +22,7 @@ const getWeatherForecast = async (req, res) => {
       });
     }
 
-    const list = json.list; // 3-hour data (5 days from free API)
+    const list = json.list; 
 
     const dailyData = {};
     list.forEach((item) => {
@@ -64,7 +64,7 @@ const getWeatherForecast = async (req, res) => {
       };
     });
 
-    // Extend to 14 days: days 6–14 as outlook (API only gives 5 days)
+    
     const lastReal = forecastTrend[forecastTrend.length - 1];
     const lastDate = lastReal ? new Date(lastReal.date) : new Date();
     for (let i = forecastTrend.length; i < 14; i++) {
@@ -73,7 +73,7 @@ const getWeatherForecast = async (req, res) => {
       const dateStr = d.toISOString().slice(0, 10);
       forecastTrend.push({
         date: dateStr,
-        avgTemp: lastReal ? lastReal.avgTemp : "—",
+        avgTemp: lastReal ? lastReal.avgTemp : "â€”",
         rainTrend: "Outlook",
         condition: "Outlook",
         isOutlook: true,
@@ -85,7 +85,7 @@ const getWeatherForecast = async (req, res) => {
       daysAnalyzed: forecastTrend.length,
       trend: forecastTrend,
       insight:
-        "Days 1–5 from live data; days 6–14 are extended outlook. Forecast indicates temperature stability and manageable rainfall suitable for crop planning.",
+        "Days 1â€“5 from live data; days 6â€“14 are extended outlook. Forecast indicates temperature stability and manageable rainfall suitable for crop planning.",
     });
   } catch (error) {
     console.error(error);
@@ -97,3 +97,4 @@ const getWeatherForecast = async (req, res) => {
 };
 
 module.exports = { getWeatherForecast };
+

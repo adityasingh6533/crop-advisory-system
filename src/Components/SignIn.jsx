@@ -1,10 +1,10 @@
 import "../css/SignIn.css";
 import { signIn } from "../api/userApi";
 
-/* 🔑 Language rule */
+
 const lang = localStorage.getItem("lang") || "en";
 
-/* 🌐 UI Text (Hindi / English) */
+
 const text = {
   en: {
     heading: "Get Your Crop Advisory",
@@ -32,9 +32,7 @@ const text = {
   }
 };
 
-/* ============================================
-   Handle Sign In (LOGIC SAME)
-============================================ */
+
 const HandleSignIn = async () => {
   const credential = document.getElementById("text1").value;
   const password = document.getElementById("password1").value;
@@ -57,9 +55,7 @@ const HandleSignIn = async () => {
   }
 };
 
-/* ============================================
-   React Component
-============================================ */
+
 const SignIn = () => {
   return (
     <div className="MainContainer">

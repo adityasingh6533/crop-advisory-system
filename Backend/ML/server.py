@@ -1,10 +1,9 @@
-import os
+﻿import os
 import sys
 from werkzeug.utils import secure_filename
 
 
 def _ensure_backend_venv_python():
-    # Always run this server with Backend/venv so tensorflow is available.
     current_dir = os.path.dirname(os.path.abspath(__file__))
     venv_python = os.path.abspath(
         os.path.join(current_dir, "..", "venv", "Scripts", "python.exe")
@@ -67,3 +66,4 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
