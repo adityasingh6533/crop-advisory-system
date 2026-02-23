@@ -11,7 +11,7 @@ const baseUrls = isLocalHost()
   ? [envBaseUrl || getMlApiBaseUrl(), "http://127.0.0.1:5001", "http://localhost:5001"].filter(Boolean)
   : [envBaseUrl || getMlApiBaseUrl()].filter(Boolean);
 
-const fetchWithTimeout = async (url, options = {}, timeoutMs = 45000) => {
+const fetchWithTimeout = async (url, options = {}, timeoutMs = 120000) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -21,6 +21,8 @@ const fetchWithTimeout = async (url, options = {}, timeoutMs = 45000) => {
   }
 };
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const detectDisease = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
@@ -28,21 +30,29 @@ export const detectDisease = async (file) => {
   let lastError = null;
 
   for (const baseUrl of baseUrls) {
-    try {
-      const response = await fetchWithTimeout(`${baseUrl}/predict`, {
-        method: "POST",
-        body: formData,
-      });
+    for (let attempt = 1; attempt <= 2; attempt += 1) {
+      try {
+        const response = await fetchWithTimeout(`${baseUrl}/predict`, {
+          method: "POST",
+          body: formData,
+        });
 
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        const details = err.details ? ` (${err.details})` : "";
-        throw new Error((err.error || "Prediction failed") + details);
+        if (!response.ok) {
+          const err = await response.json().catch(() => ({}));
+          const details = err.details ? ` (${err.details})` : "";
+          throw new Error((err.error || "Prediction failed") + details);
+        }
+
+        return response.json();
+      } catch (error) {
+        lastError = error;
+        if (error?.name === "AbortError" && attempt < 2) {
+          // Render free-tier cold starts can exceed the first attempt timeout.
+          await delay(4000);
+          continue;
+        }
+        break;
       }
-
-      return response.json();
-    } catch (error) {
-      lastError = error;
     }
   }
 
