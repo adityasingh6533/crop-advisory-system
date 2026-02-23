@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 import LanguageSelect from './Components/LanguageSelect';
 import Home from './Components/Home';
@@ -52,6 +53,7 @@ function App() {
         />
 
       </Routes>
+      <Analytics />
     </div>
   );
 }
