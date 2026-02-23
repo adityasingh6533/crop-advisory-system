@@ -15,13 +15,34 @@ const parsedCorsOrigins = corsOrigin
   .split(",")
   .map((v) => v.trim())
   .filter(Boolean);
+const allowVercelPreviewOrigins =
+  process.env.CORS_ALLOW_VERCEL_PREVIEWS !== "false";
+
+const normalizeOrigin = (value) => value.replace(/\/+$/, "");
+const allowedOrigins = parsedCorsOrigins.map(normalizeOrigin);
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+  if (corsOrigin === "*" || allowedOrigins.length === 0) return true;
+
+  const normalizedOrigin = normalizeOrigin(origin);
+  if (allowedOrigins.includes(normalizedOrigin)) return true;
+
+  if (allowVercelPreviewOrigins && /^https:\/\/.*\.vercel\.app$/i.test(normalizedOrigin)) {
+    return true;
+  }
+
+  return false;
+};
 
 app.use(
   cors({
-    origin:
-      corsOrigin === "*" || parsedCorsOrigins.length === 0
-        ? true
-        : parsedCorsOrigins,
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("CORS blocked for this origin"));
+    },
     credentials: true,
   })
 );
