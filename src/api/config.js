@@ -5,7 +5,7 @@ const isLocalHost = (hostname) =>
   hostname === "127.0.0.1" ||
   hostname === "[::1]";
 
-const PRODUCTION_API_FALLBACK = "https://crop-advisory-backend.onrender.com";
+const PRODUCTION_API_FALLBACK = "https://crop-advisory-system-4.onrender.com";
 
 export const getApiBaseUrl = () => {
   const value = process.env.REACT_APP_API_BASE_URL;
