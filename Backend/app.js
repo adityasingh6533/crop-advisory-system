@@ -11,9 +11,17 @@ require("dotenv").config();
 const app = express();
 
 const corsOrigin = process.env.CORS_ORIGIN || "*";
+const parsedCorsOrigins = corsOrigin
+  .split(",")
+  .map((v) => v.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: corsOrigin === "*" ? true : corsOrigin.split(",").map((v) => v.trim()),
+    origin:
+      corsOrigin === "*" || parsedCorsOrigins.length === 0
+        ? true
+        : parsedCorsOrigins,
     credentials: true,
   })
 );
@@ -51,3 +59,4 @@ const ensureDatabase = () => {
 ensureDatabase().catch(() => {});
 
 module.exports = { app, ensureDatabase };
+
