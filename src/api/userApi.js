@@ -19,7 +19,9 @@ const toReadableNetworkError = (error) => {
     return new Error("Request timed out. Please try again.");
   }
   if (error instanceof TypeError) {
-    return new Error("Network error. Check internet connection or backend availability.");
+    return new Error(
+      "Network/CORS error. Backend may be up but blocking this frontend origin. Check Render CORS_ORIGIN and redeploy backend."
+    );
   }
   return error;
 };

@@ -1,11 +1,25 @@
 import { getMlApiBaseUrl } from "./config";
 
 const envBaseUrl = process.env.REACT_APP_ML_API_URL;
-const baseUrls = [
-  envBaseUrl || getMlApiBaseUrl(),
-  "http://127.0.0.1:5001",
-  "http://localhost:5001",
-].filter(Boolean);
+const isLocalHost = () =>
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "[::1]");
+
+const baseUrls = isLocalHost()
+  ? [envBaseUrl || getMlApiBaseUrl(), "http://127.0.0.1:5001", "http://localhost:5001"].filter(Boolean)
+  : [envBaseUrl || getMlApiBaseUrl()].filter(Boolean);
+
+const fetchWithTimeout = async (url, options = {}, timeoutMs = 45000) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
 
 export const detectDisease = async (file) => {
   const formData = new FormData();
@@ -15,7 +29,7 @@ export const detectDisease = async (file) => {
 
   for (const baseUrl of baseUrls) {
     try {
-      const response = await fetch(`${baseUrl}/predict`, {
+      const response = await fetchWithTimeout(`${baseUrl}/predict`, {
         method: "POST",
         body: formData,
       });
@@ -33,7 +47,9 @@ export const detectDisease = async (file) => {
   }
 
   throw new Error(
-    lastError?.message ||
-      "Could not connect to ML server. Start Backend/ML/server.py on port 5001."
+    lastError?.name === "AbortError"
+      ? "ML prediction timed out. Render service may be cold-starting; retry once in 20-30 seconds."
+      : lastError?.message ||
+        "Could not connect to ML server. Verify REACT_APP_ML_API_URL or start Backend/ML/server.py on port 5001."
   );
 };
