@@ -1,6 +1,5 @@
-import { getApiBaseUrl } from "./config";
-
-const baseURL = `${getApiBaseUrl()}/api/user`;
+const RENDER_BACKEND_BASE = "https://crop-advisory-backend.onrender.com";
+const baseURL = `${RENDER_BACKEND_BASE}/api/user`;
 const REQUEST_TIMEOUT_MS = 20000;
 
 const fetchWithTimeout = async (url, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) => {
@@ -19,9 +18,26 @@ const toReadableNetworkError = (error) => {
     return new Error("Request timed out. Please try again.");
   }
   if (error instanceof TypeError) {
-    return new Error("Network error. Check internet connection or server CORS/API URL settings.");
+    return new Error("Network error. Check internet connection or backend availability.");
   }
   return error;
+};
+
+const parseErrorResponse = async (response, fallbackMessage) => {
+  const rawText = await response.text();
+
+  if (rawText) {
+    try {
+      const data = JSON.parse(rawText);
+      if (data?.error) return data.error;
+      if (data?.message) return data.message;
+    } catch {
+      // Non-JSON response
+    }
+  }
+
+  const compactText = rawText ? ` ${rawText.replace(/\s+/g, " ").slice(0, 120)}` : "";
+  return `${fallbackMessage} (HTTP ${response.status})${compactText}`;
 };
 
 export const createUser = async (userData) => {
@@ -35,8 +51,8 @@ export const createUser = async (userData) => {
     });
 
     if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      const message = await parseErrorResponse(response, "Sign-up failed");
+      throw new Error(message);
     }
 
     return await response.json();
@@ -58,8 +74,8 @@ export const signIn = async (credentials) => {
     });
 
     if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error(data.error || "Sign-in failed");
+      const message = await parseErrorResponse(response, "Sign-in failed");
+      throw new Error(message);
     }
 
     return await response.json();
