@@ -22,6 +22,18 @@ const fetchWithTimeout = async (url, options = {}, timeoutMs = 120000) => {
 };
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const warmedUpUrls = new Set();
+
+const warmupMlService = async (baseUrl) => {
+  if (warmedUpUrls.has(baseUrl)) return;
+  try {
+    await fetchWithTimeout(`${baseUrl}/`, { method: "GET" }, 15000);
+  } catch {
+    // Warmup is best-effort only.
+  } finally {
+    warmedUpUrls.add(baseUrl);
+  }
+};
 
 export const detectDisease = async (file) => {
   const formData = new FormData();
@@ -30,6 +42,7 @@ export const detectDisease = async (file) => {
   let lastError = null;
 
   for (const baseUrl of baseUrls) {
+    await warmupMlService(baseUrl);
     for (let attempt = 1; attempt <= 2; attempt += 1) {
       try {
         const response = await fetchWithTimeout(`${baseUrl}/predict`, {

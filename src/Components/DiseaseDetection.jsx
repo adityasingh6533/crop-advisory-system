@@ -55,12 +55,59 @@ const DiseaseDetection = () => {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleUpload = (e) => {
+  const compressImage = async (imageFile) => {
+    const maxDimension = 1024;
+    const quality = 0.82;
+
+    if (!imageFile.type.startsWith("image/")) {
+      return imageFile;
+    }
+
+    const objectUrl = URL.createObjectURL(imageFile);
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = objectUrl;
+      });
+
+      const ratio = Math.min(maxDimension / img.width, maxDimension / img.height, 1);
+      const targetWidth = Math.max(1, Math.round(img.width * ratio));
+      const targetHeight = Math.max(1, Math.round(img.height * ratio));
+
+      const canvas = document.createElement("canvas");
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return imageFile;
+
+      ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+      const blob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, "image/jpeg", quality)
+      );
+
+      if (!blob) return imageFile;
+
+      return new File([blob], imageFile.name.replace(/\.[^.]+$/, ".jpg"), {
+        type: "image/jpeg",
+        lastModified: Date.now(),
+      });
+    } catch {
+      return imageFile;
+    } finally {
+      URL.revokeObjectURL(objectUrl);
+    }
+  };
+
+  const handleUpload = async (e) => {
     const selected = e.target.files?.[0];
     if (!selected) return;
 
-    setFile(selected);
-    setPreview(URL.createObjectURL(selected));
+    const optimizedFile = await compressImage(selected);
+    setFile(optimizedFile);
+    setPreview(URL.createObjectURL(optimizedFile));
     setPrediction(null);
   };
 
