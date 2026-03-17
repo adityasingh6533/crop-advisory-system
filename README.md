@@ -1,6 +1,6 @@
 ---
 
-## 🌾 Crop Recommendation & Sowing Advisory (Rule-Based Agronomy Engine)
+## 🌾 Hybrid Crop Advisory System with AI-based Disease Detection
 
 Along with disease detection, the system provides intelligent crop sowing advice based on environmental conditions.
 
