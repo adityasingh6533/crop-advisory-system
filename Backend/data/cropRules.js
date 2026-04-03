@@ -1,9 +1,4 @@
-﻿
-
 const cropRules = [
-
-  
-
   {
     crop: "Rice",
     season: "Kharif",
@@ -17,10 +12,9 @@ const cropRules = [
     reasons: [
       "Requires standing water",
       "High humidity supports growth",
-      "Clay soil retains water"
+      "Clay soil retains moisture well"
     ]
   },
-
   {
     crop: "Maize",
     season: "Kharif",
@@ -37,7 +31,6 @@ const cropRules = [
       "Sensitive to waterlogging"
     ]
   },
-
   {
     crop: "Cotton",
     season: "Kharif",
@@ -50,11 +43,10 @@ const cropRules = [
     risk: "Moderate",
     reasons: [
       "Black soil retains moisture",
-      "Long warm season needed",
-      "Excess humidity causes pests"
+      "Requires long warm season",
+      "Excess humidity invites pests"
     ]
   },
-
   {
     crop: "Soybean",
     season: "Kharif",
@@ -71,9 +63,70 @@ const cropRules = [
       "Moderate water requirement"
     ]
   },
-
-  
-
+  {
+    crop: "Pearl Millet",
+    season: "Kharif",
+    soil: ["Sandy Loam", "Loamy"],
+    temp: { min: 22, max: 33 },
+    rainfall: "Low",
+    irrigation: ["Rainfed"],
+    humidity: "Low",
+    durationDays: 90,
+    risk: "Low",
+    reasons: [
+      "Tolerates very high temperature",
+      "Thrives in sandy soils",
+      "Well suited for rainfed areas"
+    ]
+  },
+  {
+    crop: "Sorghum",
+    season: "Kharif",
+    soil: ["Loamy", "Black"],
+    temp: { min: 20, max: 35 },
+    rainfall: "Moderate",
+    irrigation: ["Rainfed", "Borewell"],
+    humidity: "Moderate",
+    durationDays: 120,
+    risk: "Moderate",
+    reasons: [
+      "Drought tolerant",
+      "Less input intensive",
+      "Needs balanced rainfall"
+    ]
+  },
+  {
+    crop: "Pigeon Pea",
+    season: "Kharif",
+    soil: ["Loamy", "Clay"],
+    temp: { min: 22, max: 32 },
+    rainfall: "Moderate",
+    irrigation: ["Rainfed"],
+    humidity: "Moderate",
+    durationDays: 160,
+    risk: "Moderate",
+    reasons: [
+      "Fixes atmospheric nitrogen",
+      "Deep rooting pattern",
+      "Sensitive to waterlogging"
+    ]
+  },
+  {
+    crop: "Groundnut",
+    season: "Kharif",
+    soil: ["Sandy Loam"],
+    temp: { min: 20, max: 30 },
+    rainfall: "Moderate",
+    irrigation: ["Rainfed"],
+    humidity: "Low",
+    durationDays: 110,
+    risk: "Moderate",
+    reasons: [
+      "Well-drained soil required",
+      "Sensitive to excess moisture",
+      "Oilseed crop with stable demand"
+    ]
+  },
   {
     crop: "Wheat",
     season: "Rabi",
@@ -90,7 +143,6 @@ const cropRules = [
       "Needs controlled irrigation"
     ]
   },
-
   {
     crop: "Mustard",
     season: "Rabi",
@@ -107,7 +159,6 @@ const cropRules = [
       "Oilseed crop"
     ]
   },
-
   {
     crop: "Chickpea",
     season: "Rabi",
@@ -124,9 +175,54 @@ const cropRules = [
       "Sensitive to excess water"
     ]
   },
-
-  
-
+  {
+    crop: "Lentil",
+    season: "Rabi",
+    soil: ["Loamy", "Clay Loam"],
+    temp: { min: 10, max: 25 },
+    rainfall: "Low",
+    irrigation: ["Rainfed", "Canal"],
+    humidity: "Low",
+    durationDays: 100,
+    risk: "Low",
+    reasons: [
+      "Short duration pulse",
+      "Needs cool, dry finish",
+      "Improves soil nitrogen"
+    ]
+  },
+  {
+    crop: "Potato",
+    season: "Rabi",
+    soil: ["Loamy", "Sandy Loam"],
+    temp: { min: 15, max: 22 },
+    rainfall: "Moderate",
+    irrigation: ["Canal", "Borewell"],
+    humidity: "Moderate",
+    durationDays: 150,
+    risk: "Moderate",
+    reasons: [
+      "Prefers steady moisture",
+      "Cool temperature requirement",
+      "High market demand"
+    ]
+  },
+  {
+    crop: "Tomato",
+    season: "Rabi",
+    soil: ["Loamy"],
+    temp: { min: 18, max: 28 },
+    rainfall: "Low",
+    irrigation: ["Canal", "Borewell"],
+    humidity: "Moderate",
+    durationDays: 120,
+    risk: "Moderate",
+    reasons: [
+      "Needs steady irrigation",
+      "Sensitive to frost",
+      "High labor intensity"
+    ]
+  },
   {
     crop: "Watermelon",
     season: "Zaid",
@@ -143,7 +239,6 @@ const cropRules = [
       "Needs frequent light irrigation"
     ]
   },
-
   {
     crop: "Cucumber",
     season: "Zaid",
@@ -160,9 +255,6 @@ const cropRules = [
       "Prefers warm climate"
     ]
   },
-
-  
-
   {
     crop: "Sugarcane",
     season: "Annual",
@@ -178,25 +270,7 @@ const cropRules = [
       "High water requirement",
       "High investment but high return"
     ]
-  },
-
-  {
-    crop: "Groundnut",
-    season: "Kharif",
-    soil: ["Sandy Loam"],
-    temp: { min: 20, max: 30 },
-    rainfall: "Moderate",
-    irrigation: ["Rainfed"],
-    humidity: "Low",
-    durationDays: 110,
-    risk: "Moderate",
-    reasons: [
-      "Well-drained soil required",
-      "Sensitive to excess moisture",
-      "Oilseed crop"
-    ]
   }
-
 ];
 
 module.exports = cropRules;

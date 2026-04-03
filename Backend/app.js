@@ -1,3 +1,6 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+
 const express = require("express");
 const cors = require("cors");
 const currentWeather = require("./api/currentWeather");
@@ -5,8 +8,7 @@ const userRouter = require("./api/user");
 const CropInputRouter = require("./api/CropInput");
 const recommendation = require("./api/recommendation.js");
 const { connectToMongoDB } = require("./connect");
-
-require("dotenv").config();
+const  ndvi = require("./api/ndvi.js");
 
 const app = express();
 
@@ -17,6 +19,12 @@ const parsedCorsOrigins = corsOrigin
   .filter(Boolean);
 const allowVercelPreviewOrigins =
   process.env.CORS_ALLOW_VERCEL_PREVIEWS !== "false";
+const localDevOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:3000",
+];
 
 const normalizeOrigin = (value) => value.replace(/\/+$/, "");
 const allowedOrigins = parsedCorsOrigins.map(normalizeOrigin);
@@ -29,6 +37,10 @@ const isAllowedOrigin = (origin) => {
   if (allowedOrigins.includes(normalizedOrigin)) return true;
 
   if (allowVercelPreviewOrigins && /^https:\/\/.*\.vercel\.app$/i.test(normalizedOrigin)) {
+    return true;
+  }
+
+  if (process.env.NODE_ENV !== "production" && localDevOrigins.includes(normalizedOrigin)) {
     return true;
   }
 
@@ -53,7 +65,7 @@ app.use("/api/user", userRouter);
 app.use("/api/cropInput", CropInputRouter);
 app.use("/api/weather", currentWeather);
 app.use("/api/recommendation", recommendation);
-
+app.use("/api/ndvi", ndvi);
 app.get("/", (_req, res) => {
   res.json({ ok: true, service: "crop-advisory-backend" });
 });
@@ -80,4 +92,3 @@ const ensureDatabase = () => {
 ensureDatabase().catch(() => {});
 
 module.exports = { app, ensureDatabase };
-
