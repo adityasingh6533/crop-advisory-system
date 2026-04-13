@@ -12,6 +12,7 @@ const text = {
     analyzing: "Analyzing...",
     analyze: "Analyze Disease",
     note: "Supported: 14 crops, 38 classes (diseases + healthy leaves)",
+    loadingNote: "First prediction can take time if the ML service is waking up.",
     predicted: "Predicted Disease",
     confidence: "Confidence",
     cause: "Cause",
@@ -154,6 +155,9 @@ const DiseaseDetection = () => {
               </button>
 
               <p className="note">{t.note}</p>
+              {loading && (
+                <p className="note">{t.loadingNote || "ML service may take a little time to respond."}</p>
+              )}
             </>
           )}
 

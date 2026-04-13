@@ -72,7 +72,7 @@ This part of the system is used to:
 - Run disease detection
 - Help users identify plant health issues more quickly
 
-Model link:
+### Disease Detection Model Link
 
 `https://drive.google.com/file/d/1EUVq695L63d1wbecpNyHkgBZwsEVTlkd/view?usp=sharing`
 

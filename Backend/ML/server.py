@@ -22,7 +22,7 @@ _ensure_backend_venv_python()
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from prediction import predict_image
+from prediction import predict_image, warm_model
 
 app = Flask(__name__)
 CORS(app)
@@ -30,6 +30,22 @@ CORS(app)
 @app.route('/')
 def home():
     return "Server Running"
+
+
+@app.route('/health')
+def health():
+    try:
+        warm_model()
+        return jsonify({
+            "ok": True,
+            "modelLoaded": True,
+        }), 200
+    except Exception as error:
+        return jsonify({
+            "ok": False,
+            "modelLoaded": False,
+            "error": str(error),
+        }), 500
 
 UPLOAD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)

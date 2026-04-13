@@ -27,7 +27,7 @@ const warmedUpUrls = new Set();
 const warmupMlService = async (baseUrl) => {
   if (warmedUpUrls.has(baseUrl)) return;
   try {
-    await fetchWithTimeout(`${baseUrl}/`, { method: "GET" }, 15000);
+    await fetchWithTimeout(`${baseUrl}/health`, { method: "GET" }, 90000);
   } catch {
     // Warmup is best-effort only.
   } finally {
@@ -43,12 +43,12 @@ export const detectDisease = async (file) => {
 
   for (const baseUrl of baseUrls) {
     await warmupMlService(baseUrl);
-    for (let attempt = 1; attempt <= 2; attempt += 1) {
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
       try {
         const response = await fetchWithTimeout(`${baseUrl}/predict`, {
           method: "POST",
           body: formData,
-        });
+        }, 150000);
 
         if (!response.ok) {
           const err = await response.json().catch(() => ({}));
@@ -60,8 +60,11 @@ export const detectDisease = async (file) => {
       } catch (error) {
         lastError = error;
         if (error?.name === "AbortError" && attempt < 2) {
-          // Render free-tier cold starts can exceed the first attempt timeout.
-          await delay(4000);
+          await delay(6000);
+          continue;
+        }
+        if (error?.name === "AbortError" && attempt < 3) {
+          await delay(10000);
           continue;
         }
         break;
@@ -71,7 +74,7 @@ export const detectDisease = async (file) => {
 
   throw new Error(
     lastError?.name === "AbortError"
-      ? "ML prediction timed out. Render service may be cold-starting; retry once in 20-30 seconds."
+      ? "ML server is taking too long to wake up. It is likely a cold start on Render. Please wait 20-40 seconds and try again."
       : lastError?.message ||
         "Could not connect to ML server. Verify REACT_APP_ML_API_URL or start Backend/ML/server.py on port 5001."
   );

@@ -1,9 +1,7 @@
-import numpy as np
 import os
-MODEL_PATH = "plant_disease_model.h5";
-if not os.path.exists(MODEL_PATH):
-   print("Model not found. Download from README")
-   exit()
+from functools import lru_cache
+
+import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
@@ -11,8 +9,6 @@ MODEL_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "plant_disease_model.h5"
 )
-
-model = load_model(MODEL_PATH)
 
 classes = [
     "Apple Scab",
@@ -55,12 +51,30 @@ classes = [
     "Tomato Healthy",
 ]
 
+
+@lru_cache(maxsize=1)
+def get_model():
+    if not os.path.exists(MODEL_PATH):
+        raise FileNotFoundError(
+            "Model file not found at Backend/ML/plant_disease_model.h5"
+        )
+
+    return load_model(MODEL_PATH)
+
+
+def warm_model():
+    get_model()
+    return True
+
+
 def predict_image(img_path):
+    model = get_model()
+
     img = image.load_img(img_path, target_size=(224, 224))
     img_array = image.img_to_array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
-    prediction = model.predict(img_array)
+    prediction = model.predict(img_array, verbose=0)
     class_index = int(np.argmax(prediction))
     confidence = float(np.max(prediction) * 100)
 
