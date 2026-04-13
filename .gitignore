@@ -37,6 +37,7 @@ Backend/ML/__pycache__/
 *.pth
 Backend/ML/*.h5
 Backend/ML/*.keras
+!Backend/ML/plant_disease_model.h5
 
 # Python cache
 __pycache__/
