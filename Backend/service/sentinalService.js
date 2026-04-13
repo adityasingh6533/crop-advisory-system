@@ -1,5 +1,15 @@
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const getSentinelCredentials = () => {
+  const clientId =
+    process.env.CLIENT_ID ||
+    process.env.SENTINEL_CLIENT_ID ||
+    process.env.SENTINELHUB_CLIENT_ID;
+  const clientSecret =
+    process.env.CLIENT_SECRET ||
+    process.env.SENTINEL_CLIENT_SECRET ||
+    process.env.SENTINELHUB_CLIENT_SECRET;
+
+  return { clientId, clientSecret };
+};
 
 class SentinelError extends Error {
   constructor(message, status = 500) {
@@ -10,9 +20,13 @@ class SentinelError extends Error {
 }
 
 const ensureSentinelCredentials = () => {
-  if (!CLIENT_ID || !CLIENT_SECRET) {
+  const { clientId, clientSecret } = getSentinelCredentials();
+
+  if (!clientId || !clientSecret) {
     throw new SentinelError("Sentinel credentials are missing in Backend/.env", 500);
   }
+
+  return { clientId, clientSecret };
 };
 
 const validateBbox = (bbox) => {
@@ -93,14 +107,14 @@ const getDateRange = () => {
 };
 
 const getAccessToken = async () => {
-  ensureSentinelCredentials();
+  const { clientId, clientSecret } = ensureSentinelCredentials();
 
   const response = await fetch("https://services.sentinel-hub.com/oauth/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
+    body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
   });
 
   if (!response.ok) {
