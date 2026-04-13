@@ -5,6 +5,16 @@ const User = require('../Models/user');
 const HASH_PREFIX = 'scrypt';
 const SCRYPT_KEY_LENGTH = 64;
 
+function getJwtSecret() {
+    const secret = process.env.JWT_SECRET;
+
+    if (!secret) {
+        throw new Error('JWT_SECRET is not configured on the backend');
+    }
+
+    return secret;
+}
+
 function sanitizeUser(user) {
     if (!user) {
         return null;
@@ -70,12 +80,12 @@ function setUserToken(user) {
         id: user._id,   
         email: user.Email,
     };
-    return jsonwebtoken.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return jsonwebtoken.sign(payload, getJwtSecret(), { expiresIn: '1h' });
 }
 
 function getUserFromToken(token) {
     try {
-        const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+        const decoded = jsonwebtoken.verify(token, getJwtSecret());
         return User.findById(decoded.id);
     } catch (error) {
         return null;
