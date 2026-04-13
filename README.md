@@ -1,77 +1,211 @@
+# Hybrid Crop Advisory System with AI-based Disease Detection
+
+This project is a full-stack crop support platform that brings together:
+
+- Rule-based crop sowing advisory
+- Weather and forecast-based decision support
+- AI-based disease detection
+- User authentication
+- NDVI-based field monitoring with Sentinel Hub
+
+The goal is to help farmers and users make better crop decisions using weather conditions, field health insights, and image-based disease checks in one place.
+
 ---
 
-## 🌾 Hybrid Crop Advisory System with AI-based Disease Detection
+## Crop Advisory Module
 
-Along with disease detection, the system provides intelligent crop sowing advice based on environmental conditions.
-
-This module does not rely on machine learning.  
-Instead, it uses **agronomic rules derived from agricultural practices** to produce reliable recommendations.
-
----
+The crop advisory module does not rely on machine learning.  
+Instead, it uses agronomic rules derived from practical agricultural conditions to generate recommendations.
 
 ### Inputs Used
 
-The advisory considers multiple real-world farming parameters:
+The advisory flow considers real farming parameters such as:
 
-- Season (Kharif / Rabi / Zaid)
-- Soil Type
-- Irrigation Type (Rainfed / Irrigated)
-- 14-Day Weather Forecast
-  - Average Temperature
-  - Rainfall Amount
-  - Hot Days / Cold Days
-  - Rain Distribution
-
----
+- Season (`Kharif`, `Rabi`, `Zaid`)
+- Soil type
+- Irrigation type (`Rainfed` / `Irrigated`)
+- Weather conditions
+- Forecast-driven suitability signals
 
 ### Decision Logic
 
-The system evaluates whether sowing is safe or risky using threshold-based agricultural rules.
+The system checks whether sowing is safe, risky, or should be delayed using threshold-based agricultural rules.
 
-Examples:
+Examples of advisory logic:
 
-- Extreme temperature → delay sowing
-- Low rainfall + rainfed farming → high risk
-- Continuous hot days → heat stress advisory
-- Suitable soil moisture → sow now
-
----
+- Extreme temperature can delay sowing
+- Low rainfall with rainfed farming increases risk
+- Continuous hot conditions can trigger heat-stress warnings
+- Better moisture and weather suitability can support sow-now guidance
 
 ### Output
 
-The module produces a structured advisory instead of a simple yes/no:
+The module produces structured results instead of a basic yes/no response:
 
-- Sowing Decision (Sow Now / Delay Sowing)
-- Risk Level (Low / Moderate / High)
-- Recommended Crop Category
-- Action Plan (what farmer should do next)
-- Reasons behind the decision
-
----
+- Sowing decision
+- Risk level
+- Crop recommendation or suitability guidance
+- Action plan
+- Reasoning behind the recommendation
 
 ### Why Rule-Based Instead of ML?
 
-Agriculture decisions depend on well-established domain knowledge.  
-Using deterministic agronomic rules ensures:
+Agriculture decisions often depend on established domain knowledge.  
+Using deterministic agronomic rules helps keep the advisory:
 
-- Stability across regions
-- Explainable output
-- No dependency on large historical datasets
-- Consistent behavior in real-world conditions
+- Explainable
+- Stable
+- Consistent
+- Less dependent on large historical training datasets
 
-This makes the system more trustworthy for farmers.
-
-Download Model Link - https://drive.google.com/file/d/1EUVq695L63d1wbecpNyHkgBZwsEVTlkd/view?usp=sharing 
----
-
-### Role in Overall System
-
-The project combines three layers:
-
-1. Weather Analysis → checks environmental suitability
-2. Crop Advisory Engine → decides sowing strategy
-3. AI Disease Detection → monitors crop health
-
-Together they form a **complete crop decision support platform**.
+This makes the output easier to understand and trust.
 
 ---
+
+## AI Disease Detection
+
+The project also includes an AI-based disease detection flow for crop images.
+
+This part of the system is used to:
+
+- Upload crop images
+- Run disease detection
+- Help users identify plant health issues more quickly
+
+Model link:
+
+`https://drive.google.com/file/d/1EUVq695L63d1wbecpNyHkgBZwsEVTlkd/view?usp=sharing`
+
+---
+
+## NDVI Monitoring
+
+The project includes an NDVI monitoring feature powered by Sentinel Hub for satellite-based field health analysis.
+
+### Implemented NDVI Features
+
+- Protected NDVI pages in the frontend
+- NDVI image generation for selected field bounds
+- NDVI statistics for selected field geometry
+- Health summary from NDVI values
+- Field insights such as:
+  - coverage percentage
+  - uniformity score
+  - weak and critical area estimates
+  - urgency level
+- Save field boundaries for authenticated users
+- Save NDVI scan history
+- View saved fields and field history
+
+### NDVI Backend Route
+
+The backend exposes NDVI APIs under:
+
+- `/api/ndvi`
+
+### Sentinel Hub Usage
+
+The backend uses Sentinel Hub for:
+
+- access token generation
+- NDVI image processing
+- NDVI statistics aggregation
+
+---
+
+## Authentication and User Flow
+
+The application includes authentication features for protected access to user-specific tools.
+
+Implemented authentication features:
+
+- Sign up
+- Sign in
+- JWT-based authentication
+- Protected routes for dashboard and NDVI features
+- User profile access through backend auth middleware
+
+---
+
+## Main Frontend Routes
+
+The project currently includes these main frontend flows:
+
+- Language selection
+- Home page
+- Sign in / Sign up
+- Dashboard
+- Crop recommendation
+- Weather
+- Forecast
+- Final recommendation
+- Disease detection
+- NDVI
+- NDVI map
+
+---
+
+## Backend API Areas
+
+The backend currently serves routes for:
+
+- `/api/user`
+- `/api/cropInput`
+- `/api/weather`
+- `/api/recommendation`
+- `/api/ndvi`
+
+---
+
+## Tech Stack
+
+- React
+- React Router
+- Node.js
+- Express
+- MongoDB
+- JWT authentication
+- Sentinel Hub APIs
+
+---
+
+## Environment Variables
+
+### Frontend
+
+```env
+REACT_APP_API_BASE_URL=https://your-backend-service.onrender.com
+REACT_APP_ML_API_URL=https://your-ml-service.onrender.com
+```
+
+### Backend
+
+```env
+PORT=5002
+MONGODB_URI=your-mongodb-uri
+JWT_SECRET=replace-with-a-long-random-secret
+CORS_ORIGIN=https://your-frontend-domain.vercel.app
+WEATHER_API_KEY=your-weather-api-key
+CLIENT_ID=your-sentinel-client-id
+CLIENT_SECRET=your-sentinel-client-secret
+```
+
+The NDVI service also supports these alternative Sentinel variable names:
+
+```env
+SENTINEL_CLIENT_ID=your-sentinel-client-id
+SENTINEL_CLIENT_SECRET=your-sentinel-client-secret
+```
+
+---
+
+## Role in the Overall System
+
+The project combines multiple support layers:
+
+1. Weather analysis for environmental awareness
+2. Crop advisory for sowing decisions
+3. Disease detection for crop health checks
+4. NDVI-based monitoring for satellite field analysis
+
+Together, these features form a more complete crop decision support platform.
