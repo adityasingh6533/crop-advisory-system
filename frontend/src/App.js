@@ -12,7 +12,9 @@ import FinalRecommendation from './pages/FinalRecommendation';
 import DiseaseDetection from './pages/DiseaseDetection';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import { UserProvider } from './contextProvider/context';
+import NDVI from './components/NDVI';
 import './App.css';
+import NDVIMap from './components/NDVIMap';
 
 function App() {
   const lang = localStorage.getItem("lang"); 
@@ -50,6 +52,15 @@ function App() {
         <Route
           path="/recommendation"
           element={<ProtectedRoute><FinalRecommendation /></ProtectedRoute>}
+        />
+
+        <Route
+          path="/ndvi"
+          element={<ProtectedRoute><NDVI /></ProtectedRoute>}
+        />
+        <Route
+          path="/ndvi-map"
+          element={<ProtectedRoute><NDVIMap /></ProtectedRoute>}
         />
 
       </Routes>

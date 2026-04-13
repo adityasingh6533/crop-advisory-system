@@ -1,4 +1,5 @@
 import "../css/CropRecommendation.css";
+import { useState } from "react";
 import { createCropInput } from "../api/CropInputApi";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,7 @@ const text = {
     alertSuccess: "Crop input submitted successfully!",
     optionsSoil: ["Select soil type", "Sandy", "Clay", "Loamy", "Black", "Red"],
     optionsSeason: ["Select season", "Kharif", "Rabi", "Zaid"],
-    optionsIrrigation: ["Select irrigation", "Rainfed", "Canal", "Borewell"]
+    optionsIrrigation: ["Select irrigation", "Rainfed", "Canal", "Borewell"],
   },
   hi: {
     heading: "फसल अनुशंसा",
@@ -29,25 +30,26 @@ const text = {
     labelSeason: "सीजन (ऋतु)",
     labelIrrigation: "सिंचाई का प्रकार",
     btnSubmit: "मौसम देखें",
-    alertRequired: "सभी फ़ील्ड अनिवार्य हैं!",
+    alertRequired: "सभी फील्ड अनिवार्य हैं!",
     alertSuccess: "फसल इनपुट सफलतापूर्वक जमा हो गया!",
     optionsSoil: ["मिट्टी का प्रकार चुनें", "रेतीली (Sandy)", "चिकनी (Clay)", "दोमट (Loamy)", "काली (Black)", "लाल (Red)"],
     optionsSeason: ["सीजन चुनें", "खरीफ", "रबी", "जायद"],
-    optionsIrrigation: ["सिंचाई चुनें", "वर्षा आधारित (Rainfed)", "नहर (Canal)", "बोरवेल"]
-  }
+    optionsIrrigation: ["सिंचाई चुनें", "वर्षा आधारित (Rainfed)", "नहर (Canal)", "बोरवेल"],
+  },
 };
 
 const CropRecommendation = () => {
   const navigate = useNavigate();
+  const [location, setLocation] = useState("");
+  const [soilType, setSoilType] = useState(text[lang].optionsSoil[0]);
+  const [season, setSeason] = useState(text[lang].optionsSeason[0]);
+  const [irrigationType, setIrrigationType] = useState(
+    text[lang].optionsIrrigation[0]
+  );
 
   const handleRecommendation = async () => {
-    const location = document.querySelector('input[type="text"]').value;
-    const soilType = document.querySelectorAll('select')[0].value;
-    const season = document.querySelectorAll('select')[1].value;
-    const irrigationType = document.querySelectorAll('select')[2].value;
-
     if (
-      !location ||
+      !location.trim() ||
       soilType === text[lang].optionsSoil[0] ||
       season === text[lang].optionsSeason[0] ||
       irrigationType === text[lang].optionsIrrigation[0]
@@ -57,7 +59,7 @@ const CropRecommendation = () => {
     }
 
     const cropInputData = {
-      location,
+      location: location.trim(),
       soilType,
       season,
       irrigationType,
@@ -83,12 +85,20 @@ const CropRecommendation = () => {
         <div className="crop-form">
           <div className="form-group">
             <label>{text[lang].labelLocation}</label>
-            <input type="text" placeholder={text[lang].phLocation} />
+            <input
+              type="text"
+              placeholder={text[lang].phLocation}
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <label>{text[lang].labelSoil}</label>
-            <select>
+            <select
+              value={soilType}
+              onChange={(event) => setSoilType(event.target.value)}
+            >
               {text[lang].optionsSoil.map((opt, i) => (
                 <option key={i}>{opt}</option>
               ))}
@@ -97,7 +107,10 @@ const CropRecommendation = () => {
 
           <div className="form-group">
             <label>{text[lang].labelSeason}</label>
-            <select>
+            <select
+              value={season}
+              onChange={(event) => setSeason(event.target.value)}
+            >
               {text[lang].optionsSeason.map((opt, i) => (
                 <option key={i}>{opt}</option>
               ))}
@@ -106,14 +119,21 @@ const CropRecommendation = () => {
 
           <div className="form-group">
             <label>{text[lang].labelIrrigation}</label>
-            <select>
+            <select
+              value={irrigationType}
+              onChange={(event) => setIrrigationType(event.target.value)}
+            >
               {text[lang].optionsIrrigation.map((opt, i) => (
                 <option key={i}>{opt}</option>
               ))}
             </select>
           </div>
 
-          <button type="button" className="view-weather-btn" onClick={handleRecommendation}>
+          <button
+            type="button"
+            className="view-weather-btn"
+            onClick={handleRecommendation}
+          >
             {text[lang].btnSubmit}
           </button>
         </div>
