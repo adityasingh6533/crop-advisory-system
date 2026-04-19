@@ -7,7 +7,7 @@ const lang = localStorage.getItem("lang") || "en";
 
 const text = {
   en: {
-    heading: "Get Your Crop Advisory",
+    heading: "Log in to your account",
     subtext: "Please enter your details to sign in",
     googleText: "or continue with Google",
     googleBtn: "Sign in with Google",
