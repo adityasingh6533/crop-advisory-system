@@ -11,7 +11,7 @@ const text = {
     logout: "Logout",
     heading: "Welcome to Crop Advisory Dashboard",
     subtitle: "Plan smarter farming decisions with weather-based crop guidance",
-    btnRecommendation: "Get Crop Recommendation",
+    btnRecommendation: "Crop Recommendation",
     btnWeather: "Check Weather Forecast",
     btnPlanning: "Seasonal Crop Planning",
     btnSoil: "Soil Based Suggestions",
@@ -40,9 +40,10 @@ const Dashboard = () => {
     Email: "user@email.com",
     Username: "User",
   };
+  const avatarLabel = (user.FirstName || user.Username || "U").charAt(0).toUpperCase();
 
-  const handleLogout = () => {
-    logoutUser();
+  const handleLogout = async () => {
+    await logoutUser();
     navigate("/signin");
   };
 
@@ -51,10 +52,10 @@ const Dashboard = () => {
       <div className="dashboard-card">
         <div className="user-info-bar">
           <div className="user-left">
-            <div className="avatar">User</div>
+            <div className="avatar">{avatarLabel}</div>
             <div className="user-text">
               <h3 className="username">
-                {text[lang].welcome}, {user.Username}
+                {text[lang].welcome}, {user.FirstName || user.Username}
               </h3>
               <p className="email">{user.Email}</p>
             </div>

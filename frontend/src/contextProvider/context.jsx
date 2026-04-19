@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getProfile, signIn } from "../api/userApi";
+import { signInWithGooglePopup, signOutFromFirebase } from "../firebase/config";
 
 const USER_STORAGE_KEY = "cropAdvisoryUser";
 const TOKEN_STORAGE_KEY = "token";
@@ -20,6 +21,31 @@ const readStoredUser = () => {
   }
 };
 
+const normalizeUser = (rawUser) => {
+  if (!rawUser) {
+    return null;
+  }
+
+  const fullName = rawUser.displayName || "";
+  const [firstName = "", ...rest] = fullName.split(" ");
+  const lastName = rest.join(" ").trim();
+  const email = rawUser.Email || rawUser.email || "";
+  const username =
+    rawUser.Username ||
+    rawUser.username ||
+    fullName ||
+    (email ? email.split("@")[0] : "User");
+
+  return {
+    ...rawUser,
+    FirstName: rawUser.FirstName || rawUser.firstName || firstName || username,
+    LastName: rawUser.LastName || rawUser.lastName || lastName,
+    Username: username,
+    Email: email,
+    photoURL: rawUser.photoURL || rawUser.PhotoURL || "",
+  };
+};
+
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
@@ -37,7 +63,7 @@ export const UserProvider = ({ children }) => {
 
       try {
         const response = await getProfile(token);
-        const profile = response?.user || response || null;
+        const profile = normalizeUser(response?.user || response || null);
 
         setUser(profile);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(profile));
@@ -56,7 +82,7 @@ export const UserProvider = ({ children }) => {
 
   const loginUser = async (credentials) => {
     const response = await signIn(credentials);
-    const authenticatedUser = response?.user || null;
+    const authenticatedUser = normalizeUser(response?.user || null);
     const token = response?.token;
 
     if (token) {
@@ -71,10 +97,37 @@ export const UserProvider = ({ children }) => {
 
     setUser(authenticatedUser);
 
-    return response;
+    return {
+      ...response,
+      user: authenticatedUser,
+    };
   };
 
-  const logoutUser = () => {
+  const loginWithGoogle = async () => {
+    const result = await signInWithGooglePopup();
+    const firebaseUser = result.user;
+    const authenticatedUser = normalizeUser({
+      uid: firebaseUser.uid,
+      displayName: firebaseUser.displayName,
+      email: firebaseUser.email,
+      photoURL: firebaseUser.photoURL,
+      authProvider: "google",
+    });
+
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(authenticatedUser));
+    setUser(authenticatedUser);
+
+    return authenticatedUser;
+  };
+
+  const logoutUser = async () => {
+    try {
+      await signOutFromFirebase();
+    } catch (error) {
+      console.error("Firebase sign-out skipped:", error);
+    }
+
     localStorage.removeItem(TOKEN_STORAGE_KEY);
     localStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
@@ -87,6 +140,7 @@ export const UserProvider = ({ children }) => {
     isAuthenticated: Boolean(user),
     isAuthLoading,
     loginUser,
+    loginWithGoogle,
     logoutUser,
   };
 
