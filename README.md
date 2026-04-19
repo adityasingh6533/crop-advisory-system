@@ -176,6 +176,12 @@ The backend currently serves routes for:
 ```env
 REACT_APP_API_BASE_URL=https://your-backend-service.onrender.com
 REACT_APP_ML_API_URL=https://your-ml-service.onrender.com
+REACT_APP_FIREBASE_API_KEY=your-firebase-api-key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+REACT_APP_FIREBASE_APP_ID=your-firebase-app-id
 ```
 
 ### Backend

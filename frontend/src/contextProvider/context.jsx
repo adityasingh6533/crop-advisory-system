@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getProfile, signIn } from "../api/userApi";
-import { signInWithGooglePopup, signOutFromFirebase } from "../firebase/config";
+import {
+  getGoogleRedirectSignInResult,
+  signInWithGooglePopup,
+  signOutFromFirebase,
+} from "../firebase/config";
 
 const USER_STORAGE_KEY = "cropAdvisoryUser";
 const TOKEN_STORAGE_KEY = "token";
@@ -54,6 +58,33 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const restoreSession = async () => {
+      const setGoogleUser = (firebaseUser) => {
+        const authenticatedUser = normalizeUser({
+          uid: firebaseUser.uid,
+          displayName: firebaseUser.displayName,
+          email: firebaseUser.email,
+          photoURL: firebaseUser.photoURL,
+          authProvider: "google",
+        });
+
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(authenticatedUser));
+        setUser(authenticatedUser);
+        return authenticatedUser;
+      };
+
+      try {
+        const redirectResult = await getGoogleRedirectSignInResult();
+
+        if (redirectResult?.user) {
+          setGoogleUser(redirectResult.user);
+          setIsAuthLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.error("Google redirect sign-in failed:", error);
+      }
+
       const token = localStorage.getItem(TOKEN_STORAGE_KEY);
 
       if (!token) {
@@ -105,6 +136,11 @@ export const UserProvider = ({ children }) => {
 
   const loginWithGoogle = async () => {
     const result = await signInWithGooglePopup();
+
+    if (!result?.user) {
+      return null;
+    }
+
     const firebaseUser = result.user;
     const authenticatedUser = normalizeUser({
       uid: firebaseUser.uid,

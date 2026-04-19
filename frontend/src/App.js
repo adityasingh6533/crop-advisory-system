@@ -11,7 +11,6 @@ import Forecast from './pages/Forecast';
 import FinalRecommendation from './pages/FinalRecommendation';
 import DiseaseDetection from './pages/DiseaseDetection';
 import ProtectedRoute from './Routes/ProtectedRoute';
-import { UserProvider } from './contextProvider/context';
 import NDVI from './components/NDVI';
 import './App.css';
 import NDVIMap from './components/NDVIMap';
@@ -21,7 +20,6 @@ function App() {
 
   return (
     <div className="App">
-      <UserProvider>
       <Routes>
 
         {}
@@ -64,7 +62,6 @@ function App() {
         />
 
       </Routes>
-      </UserProvider>
     </div>
   );
 }
