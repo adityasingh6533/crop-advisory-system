@@ -12,48 +12,75 @@ const text = {
     labelLocation: "Location / District",
     phLocation: "e.g. Lucknow",
     labelSoil: "Soil Type",
-    labelSeason: "Crop",
+    labelSeason: "Season",
     labelIrrigation: "Irrigation Type",
     btnSubmit: "View Weather",
     alertRequired: "All fields are required!",
     alertSuccess: "Crop input submitted successfully!",
-    optionsSoil: ["Select soil type", "Sandy", "Clay", "Loamy", "Black", "Red"],
-    optionsSeason: ["Select season", "Kharif", "Rabi", "Zaid"],
-    optionsIrrigation: ["Select irrigation", "Rainfed", "Canal", "Borewell"],
+    optionsSoil: [
+      { value: "", label: "Select soil type" },
+      { value: "Sandy", label: "Sandy" },
+      { value: "Clay", label: "Clay" },
+      { value: "Loamy", label: "Loamy" },
+      { value: "Black", label: "Black" },
+      { value: "Red", label: "Red" },
+    ],
+    optionsSeason: [
+      { value: "", label: "Select season" },
+      { value: "Kharif", label: "Kharif" },
+      { value: "Rabi", label: "Rabi" },
+      { value: "Zaid", label: "Zaid" },
+    ],
+    optionsIrrigation: [
+      { value: "", label: "Select irrigation" },
+      { value: "Rainfed", label: "Rainfed" },
+      { value: "Canal", label: "Canal" },
+      { value: "Borewell", label: "Borewell" },
+    ],
   },
   hi: {
-    heading: "फसल अनुशंसा",
-    subtitle: "अपनी भूमि के लिए उपयुक्त फसलें जानने के लिए बुनियादी विवरण दें",
-    labelLocation: "स्थान / जिला",
-    phLocation: "जैसे: लखनऊ",
-    labelSoil: "मिट्टी का प्रकार",
-    labelSeason: "सीजन (ऋतु)",
-    labelIrrigation: "सिंचाई का प्रकार",
-    btnSubmit: "मौसम देखें",
-    alertRequired: "सभी फील्ड अनिवार्य हैं!",
-    alertSuccess: "फसल इनपुट सफलतापूर्वक जमा हो गया!",
-    optionsSoil: ["मिट्टी का प्रकार चुनें", "रेतीली (Sandy)", "चिकनी (Clay)", "दोमट (Loamy)", "काली (Black)", "लाल (Red)"],
-    optionsSeason: ["सीजन चुनें", "खरीफ", "रबी", "जायद"],
-    optionsIrrigation: ["सिंचाई चुनें", "वर्षा आधारित (Rainfed)", "नहर (Canal)", "बोरवेल"],
+    heading: "Fasal Anushansa",
+    subtitle: "Apni bhoomi ke liye upyukt fasale jaanne ke liye buniyadi vivaran dein",
+    labelLocation: "Sthaan / Jila",
+    phLocation: "Jaise: Lucknow",
+    labelSoil: "Mitti ka Prakar",
+    labelSeason: "Season (Ritu)",
+    labelIrrigation: "Sinchai ka Prakar",
+    btnSubmit: "Mausam Dekhen",
+    alertRequired: "Sabhi fields anivarya hain!",
+    alertSuccess: "Fasal input safaltapurvak jama ho gaya!",
+    optionsSoil: [
+      { value: "", label: "Mitti ka prakar chunein" },
+      { value: "Sandy", label: "Retili (Sandy)" },
+      { value: "Clay", label: "Chikni (Clay)" },
+      { value: "Loamy", label: "Domat (Loamy)" },
+      { value: "Black", label: "Kaali (Black)" },
+      { value: "Red", label: "Laal (Red)" },
+    ],
+    optionsSeason: [
+      { value: "", label: "Season chunein" },
+      { value: "Kharif", label: "Kharif" },
+      { value: "Rabi", label: "Rabi" },
+      { value: "Zaid", label: "Zaid" },
+    ],
+    optionsIrrigation: [
+      { value: "", label: "Sinchai chunein" },
+      { value: "Rainfed", label: "Varsha Aadharit (Rainfed)" },
+      { value: "Canal", label: "Nahar (Canal)" },
+      { value: "Borewell", label: "Borewell" },
+    ],
   },
 };
 
 const CropRecommendation = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("");
-  const [soilType, setSoilType] = useState(text[lang].optionsSoil[0]);
-  const [season, setSeason] = useState(text[lang].optionsSeason[0]);
-  const [irrigationType, setIrrigationType] = useState(
-    text[lang].optionsIrrigation[0]
-  );
+  const [soilType, setSoilType] = useState("");
+  const [season, setSeason] = useState("");
+  const [irrigationType, setIrrigationType] = useState("");
 
   const handleRecommendation = async () => {
-    if (
-      !location.trim() ||
-      soilType === text[lang].optionsSoil[0] ||
-      season === text[lang].optionsSeason[0] ||
-      irrigationType === text[lang].optionsIrrigation[0]
-    ) {
+    if (!location.trim() || !soilType || !season || !irrigationType) {
       alert(text[lang].alertRequired);
       return;
     }
@@ -72,7 +99,13 @@ const CropRecommendation = () => {
       navigate("/weather");
     } catch (error) {
       console.error("Error submitting crop input:", error);
-      alert("Error: " + error.message);
+      sessionStorage.setItem("CropInput", JSON.stringify(cropInputData));
+      alert(
+        lang === "hi"
+          ? "Crop input server par save nahi ho paya, lekin advisory flow continue kiya ja raha hai."
+          : "Crop input could not be saved on the server, but the advisory flow will continue."
+      );
+      navigate("/weather");
     }
   };
 
@@ -99,8 +132,10 @@ const CropRecommendation = () => {
               value={soilType}
               onChange={(event) => setSoilType(event.target.value)}
             >
-              {text[lang].optionsSoil.map((opt, i) => (
-                <option key={i}>{opt}</option>
+              {text[lang].optionsSoil.map((opt) => (
+                <option key={`soil-${opt.value || "placeholder"}`} value={opt.value}>
+                  {opt.label}
+                </option>
               ))}
             </select>
           </div>
@@ -111,8 +146,13 @@ const CropRecommendation = () => {
               value={season}
               onChange={(event) => setSeason(event.target.value)}
             >
-              {text[lang].optionsSeason.map((opt, i) => (
-                <option key={i}>{opt}</option>
+              {text[lang].optionsSeason.map((opt) => (
+                <option
+                  key={`season-${opt.value || "placeholder"}`}
+                  value={opt.value}
+                >
+                  {opt.label}
+                </option>
               ))}
             </select>
           </div>
@@ -123,8 +163,13 @@ const CropRecommendation = () => {
               value={irrigationType}
               onChange={(event) => setIrrigationType(event.target.value)}
             >
-              {text[lang].optionsIrrigation.map((opt, i) => (
-                <option key={i}>{opt}</option>
+              {text[lang].optionsIrrigation.map((opt) => (
+                <option
+                  key={`irrigation-${opt.value || "placeholder"}`}
+                  value={opt.value}
+                >
+                  {opt.label}
+                </option>
               ))}
             </select>
           </div>

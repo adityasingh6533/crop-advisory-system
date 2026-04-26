@@ -21,9 +21,9 @@ const evaluateRainfallMatch = (ruleRainfall, actualLevel) => {
 
 const translateRiskLevel = (riskLevel, lang) => {
   if (lang !== "hi") return riskLevel;
-  if (riskLevel === "High") return "उच्च";
-  if (riskLevel === "Moderate") return "मध्यम";
-  return "कम";
+  if (riskLevel === "High") return "Ucch";
+  if (riskLevel === "Moderate") return "Madhyam";
+  return "Kam";
 };
 
 const translateValue = (value, lang, type) => {
@@ -31,29 +31,29 @@ const translateValue = (value, lang, type) => {
 
   const maps = {
     season: {
-      Kharif: "खरीफ",
-      Rabi: "रबी",
-      Zaid: "जायद",
-      Annual: "वार्षिक",
+      Kharif: "Kharif",
+      Rabi: "Rabi",
+      Zaid: "Zaid",
+      Annual: "Varshik",
     },
     soil: {
-      Sandy: "रेतीली",
-      Clay: "चिकनी",
-      Loamy: "दोमट",
-      Black: "काली",
-      Red: "लाल",
-      "Clay Loam": "चिकनी दोमट",
-      "Sandy Loam": "रेतीली दोमट",
+      Sandy: "Retili",
+      Clay: "Chikni",
+      Loamy: "Domat",
+      Black: "Kaali",
+      Red: "Laal",
+      "Clay Loam": "Chikni Domat",
+      "Sandy Loam": "Retili Domat",
     },
     irrigation: {
-      Rainfed: "वर्षा आधारित",
-      Canal: "नहर",
-      Borewell: "बोरवेल",
+      Rainfed: "Varsha Aadharit",
+      Canal: "Nahar",
+      Borewell: "Borewell",
     },
     rainfall: {
-      High: "अधिक",
-      Moderate: "मध्यम",
-      Low: "कम",
+      High: "Adhik",
+      Moderate: "Madhyam",
+      Low: "Kam",
     },
   };
 
@@ -64,54 +64,101 @@ const translateRuleReason = (reason, lang) => {
   if (lang !== "hi") return reason;
 
   const reasonMap = {
-    "Requires standing water": "इस फसल के लिए खेत में पर्याप्त पानी जरूरी है।",
-    "High humidity supports growth": "अधिक नमी इस फसल की वृद्धि में सहायक है।",
-    "Clay soil retains moisture well": "चिकनी मिट्टी नमी को अच्छी तरह बनाए रखती है।",
-    "Good aeration required": "अच्छे वायुसंचार वाली मिट्टी उपयुक्त है।",
-    "Moderate rainfall preferred": "मध्यम वर्षा इसके लिए उपयुक्त रहती है।",
-    "Sensitive to waterlogging": "जलभराव से यह फसल प्रभावित हो सकती है।",
-    "Black soil retains moisture": "काली मिट्टी नमी को बनाए रखती है।",
-    "Requires long warm season": "लंबा और गर्म मौसम इसके लिए अनुकूल है।",
-    "Excess humidity invites pests": "अधिक नमी से कीटों का खतरा बढ़ता है।",
-    "Short duration crop": "यह कम अवधि में तैयार होने वाली फसल है।",
-    "Good nitrogen fixation": "यह मिट्टी में नाइट्रोजन बढ़ाने में सहायक है।",
-    "Moderate water requirement": "इसे मध्यम मात्रा में पानी चाहिए।",
-    "Tolerates very high temperature": "यह बहुत अधिक तापमान सहन कर सकती है।",
-    "Thrives in sandy soils": "यह रेतीली मिट्टी में अच्छी बढ़ती है।",
-    "Well suited for rainfed areas": "यह वर्षा आधारित क्षेत्रों के लिए उपयुक्त है।",
-    "Drought tolerant": "यह सूखे को काफी हद तक सहन कर सकती है।",
-    "Less input intensive": "इसमें अपेक्षाकृत कम लागत और संसाधन लगते हैं।",
-    "Needs balanced rainfall": "इसे संतुलित वर्षा की जरूरत होती है।",
-    "Fixes atmospheric nitrogen": "यह वातावरण से नाइट्रोजन लेकर मिट्टी को बेहतर बनाती है।",
-    "Deep rooting pattern": "इसकी जड़ें गहराई तक जाती हैं।",
-    "Well-drained soil required": "अच्छी जलनिकासी वाली मिट्टी जरूरी है।",
-    "Sensitive to excess moisture": "अधिक नमी से यह प्रभावित होती है।",
-    "Oilseed crop with stable demand": "यह तिलहनी फसल है जिसकी मांग स्थिर रहती है।",
-    "Cool climate required": "इसे ठंडा मौसम चाहिए।",
-    "Sensitive to high temperature": "अधिक तापमान से यह प्रभावित होती है।",
-    "Needs controlled irrigation": "इसे नियंत्रित सिंचाई की आवश्यकता होती है।",
-    "Low water requirement": "इसे कम पानी की जरूरत होती है।",
-    "Oilseed crop": "यह एक तिलहनी फसल है।",
-    "Legume crop improves soil": "दलहनी फसल होने से यह मिट्टी की गुणवत्ता सुधारती है।",
-    "Prefers dry climate": "यह शुष्क जलवायु में बेहतर रहती है।",
-    "Sensitive to excess water": "अधिक पानी से यह प्रभावित होती है।",
-    "Short duration pulse": "यह कम अवधि की दलहनी फसल है।",
-    "Needs cool, dry finish": "अंतिम बढ़वार के समय ठंडा और शुष्क मौसम बेहतर होता है।",
-    "Improves soil nitrogen": "यह मिट्टी में नाइट्रोजन बढ़ाने में मदद करती है।",
-    "Prefers steady moisture": "इसे संतुलित नमी पसंद है।",
-    "Cool temperature requirement": "इसे ठंडे तापमान की जरूरत होती है।",
-    "High market demand": "बाजार में इसकी मांग अधिक रहती है।",
-    "Needs steady irrigation": "इसे नियमित सिंचाई की जरूरत होती है।",
-    "Sensitive to frost": "पाला इसे नुकसान पहुंचा सकता है।",
-    "High labor intensity": "इसमें श्रम अधिक लगता है।",
-    "Requires warm temperature": "इसे गर्म तापमान की आवश्यकता होती है।",
-    "Sandy soil prevents waterlogging": "रेतीली मिट्टी जलभराव को रोकती है।",
-    "Needs frequent light irrigation": "इसे थोड़ी-थोड़ी और बार-बार सिंचाई चाहिए।",
-    "Fast growing vegetable": "यह तेजी से बढ़ने वाली सब्जी है।",
-    "Prefers warm climate": "यह गर्म जलवायु में अच्छी रहती है।",
-    "Long duration crop": "यह लंबी अवधि की फसल है।",
-    "High water requirement": "इसे अधिक पानी की आवश्यकता होती है।",
-    "High investment but high return": "इसमें लागत अधिक है, लेकिन लाभ भी अच्छा मिल सकता है।",
+    "Requires standing water":
+      "Is fasal ke liye khet me paryapt paani zaroori hai.",
+    "High humidity supports growth":
+      "Adhik nami is fasal ki vriddhi me sahayak hai.",
+    "Clay soil retains moisture well":
+      "Chikni mitti nami ko achchhi tarah banae rakhti hai.",
+    "Good aeration required":
+      "Achchhe vayusanchaar wali mitti upyukt hai.",
+    "Moderate rainfall preferred":
+      "Madhyam varsha iske liye upyukt rehti hai.",
+    "Sensitive to waterlogging":
+      "Jalbharav se yeh fasal prabhavit ho sakti hai.",
+    "Black soil retains moisture":
+      "Kaali mitti nami ko banae rakhti hai.",
+    "Requires long warm season":
+      "Lamba aur garm mausam iske liye anukool hai.",
+    "Excess humidity invites pests":
+      "Adhik nami se keeton ka khatra badhta hai.",
+    "Short duration crop":
+      "Yeh kam avadhi me taiyar hone wali fasal hai.",
+    "Good nitrogen fixation":
+      "Yeh mitti me nitrogen badhane me sahayak hai.",
+    "Moderate water requirement":
+      "Ise madhyam matra me paani chahiye.",
+    "Tolerates very high temperature":
+      "Yeh bahut adhik taapman sahan kar sakti hai.",
+    "Thrives in sandy soils":
+      "Yeh retili mitti me achchhi badhti hai.",
+    "Well suited for rainfed areas":
+      "Yeh varsha aadharit kshetron ke liye upyukt hai.",
+    "Drought tolerant":
+      "Yeh sukhe ko kaafi had tak sahan kar sakti hai.",
+    "Less input intensive":
+      "Isme apekshakrit kam lagat aur sansaadhan lagte hain.",
+    "Needs balanced rainfall":
+      "Ise santulit varsha ki zaroorat hoti hai.",
+    "Fixes atmospheric nitrogen":
+      "Yeh vaataavaran se nitrogen lekar mitti ko behtar banati hai.",
+    "Deep rooting pattern":
+      "Iski jadein gahraai tak jaati hain.",
+    "Well-drained soil required":
+      "Achchhi jalnikaasi wali mitti zaroori hai.",
+    "Sensitive to excess moisture":
+      "Adhik nami se yeh prabhavit hoti hai.",
+    "Oilseed crop with stable demand":
+      "Yeh tilhani fasal hai jiski maang sthir rehti hai.",
+    "Cool climate required":
+      "Ise thanda mausam chahiye.",
+    "Sensitive to high temperature":
+      "Adhik taapman se yeh prabhavit hoti hai.",
+    "Needs controlled irrigation":
+      "Ise niyantrit sinchai ki aavashyakta hoti hai.",
+    "Low water requirement":
+      "Ise kam paani ki zaroorat hoti hai.",
+    "Oilseed crop": "Yeh ek tilhani fasal hai.",
+    "Legume crop improves soil":
+      "Dalahani fasal hone se yeh mitti ki gunwatta sudhaarti hai.",
+    "Prefers dry climate":
+      "Yeh shushk jalvayu me behtar rehti hai.",
+    "Sensitive to excess water":
+      "Adhik paani se yeh prabhavit hoti hai.",
+    "Short duration pulse":
+      "Yeh kam avadhi ki dalhani fasal hai.",
+    "Needs cool, dry finish":
+      "Antim badhavar ke samay thanda aur shushk mausam behtar hota hai.",
+    "Improves soil nitrogen":
+      "Yeh mitti me nitrogen badhane me madad karti hai.",
+    "Prefers steady moisture":
+      "Ise santulit nami pasand hai.",
+    "Cool temperature requirement":
+      "Ise thande taapman ki zaroorat hoti hai.",
+    "High market demand":
+      "Bazaar me iski maang adhik rehti hai.",
+    "Needs steady irrigation":
+      "Ise niyamit sinchai ki zaroorat hoti hai.",
+    "Sensitive to frost":
+      "Paala ise nuksaan pahuncha sakta hai.",
+    "High labor intensity":
+      "Isme shram adhik lagta hai.",
+    "Requires warm temperature":
+      "Ise garm taapman ki aavashyakta hoti hai.",
+    "Sandy soil prevents waterlogging":
+      "Retili mitti jalbharav ko rokti hai.",
+    "Needs frequent light irrigation":
+      "Ise thodi-thodi aur baar-baar sinchai chahiye.",
+    "Fast growing vegetable":
+      "Yeh tezi se badhne wali sabzi hai.",
+    "Prefers warm climate":
+      "Yeh garm jalvayu me achchhi rehti hai.",
+    "Long duration crop":
+      "Yeh lambi avadhi ki fasal hai.",
+    "High water requirement":
+      "Ise adhik paani ki aavashyakta hoti hai.",
+    "High investment but high return":
+      "Isme lagat adhik hai, lekin laabh bhi achchha mil sakta hai.",
   };
 
   return reasonMap[reason] || reason;
@@ -124,8 +171,8 @@ const evaluateTemperatureScore = (range, avgTemp, dynamicReasons, cropName, lang
   if (avgTemp >= min && avgTemp <= max) {
     dynamicReasons.push(
       lang === "hi"
-        ? `${cropName} ${min}°C से ${max}°C के बीच अच्छे से बढ़ती है और अनुमानित औसत तापमान ${avgTemp}°C है।`
-        : `${cropName} thrives between ${min}°C and ${max}°C and the forecasted average is ${avgTemp}°C.`
+        ? `${cropName} ${min}C se ${max}C ke beech achchhe se badhti hai aur anumaanit ausat taapman ${avgTemp}C hai.`
+        : `${cropName} thrives between ${min}C and ${max}C and the forecasted average is ${avgTemp}C.`
     );
     return 1.3;
   }
@@ -134,22 +181,31 @@ const evaluateTemperatureScore = (range, avgTemp, dynamicReasons, cropName, lang
   if (avgTemp >= min - margin && avgTemp <= max + margin) {
     dynamicReasons.push(
       lang === "hi"
-        ? `${cropName} की पसंदीदा ${min}-${max}°C सीमा के करीब वर्तमान तापमान ${avgTemp}°C है।`
-        : `${cropName} is marginally within the preferred ${min}-${max}°C range (current ${avgTemp}°C).`
+        ? `${cropName} ki pasandida ${min}-${max}C seema ke kareeb vartamaan taapman ${avgTemp}C hai.`
+        : `${cropName} is marginally within the preferred ${min}-${max}C range (current ${avgTemp}C).`
     );
     return 0.7;
   }
 
   dynamicReasons.push(
     lang === "hi"
-      ? `${cropName} के लिए ${min}-${max}°C बेहतर है, लेकिन वर्तमान औसत तापमान ${avgTemp}°C है।`
-      : `${cropName} prefers ${min}-${max}°C but current average is ${avgTemp}°C.`
+      ? `${cropName} ke liye ${min}-${max}C behtar hai, lekin vartamaan ausat taapman ${avgTemp}C hai.`
+      : `${cropName} prefers ${min}-${max}C but current average is ${avgTemp}C.`
   );
   return 0.2;
 };
 
 const scoreCropRule = (rule, context) => {
-  const { soilN, soilType, irrigationN, irrigationType, avgTemp, seasonN, rainfallLevel, lang } = context;
+  const {
+    soilN,
+    soilType,
+    irrigationN,
+    irrigationType,
+    avgTemp,
+    seasonN,
+    rainfallLevel,
+    lang,
+  } = context;
   const dynamicReasons = [];
   let score = 0;
 
@@ -158,13 +214,15 @@ const scoreCropRule = (rule, context) => {
     score += 1.5;
     dynamicReasons.push(
       lang === "hi"
-        ? `${rule.crop} आपके दिए गए ${translateValue(soilType, lang, "soil")} मिट्टी प्रकार के लिए उपयुक्त है।`
+        ? `${rule.crop} aapke diye gaye ${translateValue(soilType, lang, "soil")} mitti prakar ke liye upyukt hai.`
         : `${rule.crop} suits the ${soilType} soil you provided.`
     );
   } else {
     dynamicReasons.push(
       lang === "hi"
-        ? `${rule.crop} ${rule.soil.map((soil) => translateValue(soil, lang, "soil")).join(", ")} जैसी मिट्टी में बेहतर रहती है।`
+        ? `${rule.crop} ${rule.soil
+            .map((soil) => translateValue(soil, lang, "soil"))
+            .join(", ")} jaise mitti me behtar rehti hai.`
         : `${rule.crop} prefers soils like ${rule.soil.join(", ")}.`
     );
   }
@@ -174,13 +232,15 @@ const scoreCropRule = (rule, context) => {
     score += 1;
     dynamicReasons.push(
       lang === "hi"
-        ? `${rule.crop} ${translateValue(irrigationType, lang, "irrigation")} सिंचाई का अच्छा उपयोग कर सकती है।`
+        ? `${rule.crop} ${translateValue(irrigationType, lang, "irrigation")} sinchai ka achchha upayog kar sakti hai.`
         : `${rule.crop} can make good use of ${irrigationType} irrigation.`
     );
   } else {
     dynamicReasons.push(
       lang === "hi"
-        ? `${rule.crop} आमतौर पर ${rule.irrigation.map((irr) => translateValue(irr, lang, "irrigation")).join(", ")} सिंचाई के साथ बेहतर रहती है।`
+        ? `${rule.crop} aamtaur par ${rule.irrigation
+            .map((irr) => translateValue(irr, lang, "irrigation"))
+            .join(", ")} sinchai ke saath behtar rehti hai.`
         : `${rule.crop} typically pairs with ${rule.irrigation.join(", ")} irrigation.`
     );
   }
@@ -192,13 +252,13 @@ const scoreCropRule = (rule, context) => {
   if (rainfallScore >= 0.9) {
     dynamicReasons.push(
       lang === "hi"
-        ? `अनुमानित ${translateValue(rainfallLevel, lang, "rainfall")} वर्षा ${rule.crop} की ${translateValue(rule.rainfall, lang, "rainfall")} वर्षा आवश्यकता से मेल खाती है।`
+        ? `Anumaanit ${translateValue(rainfallLevel, lang, "rainfall")} varsha ${rule.crop} ki ${translateValue(rule.rainfall, lang, "rainfall")} varsha aavashyakta se mel khaati hai.`
         : `Forecasted ${rainfallLevel} rain aligns with the ${rule.rainfall} requirement.`
     );
   } else {
     dynamicReasons.push(
       lang === "hi"
-        ? `वर्षा स्तर ${translateValue(rainfallLevel, lang, "rainfall")} है, जबकि ${rule.crop} को ${translateValue(rule.rainfall, lang, "rainfall")} वर्षा पसंद है।`
+        ? `Varsha star ${translateValue(rainfallLevel, lang, "rainfall")} hai, jabki ${rule.crop} ko ${translateValue(rule.rainfall, lang, "rainfall")} varsha pasand hai.`
         : `Rainfall is ${rainfallLevel} while ${rule.crop} prefers ${rule.rainfall} rain.`
     );
   }
@@ -224,7 +284,7 @@ const buildActionPlan = ({ decision, rainfallLevel, irrigationN, hotDays, rainyD
   if (decision === "DELAY_SOWING") {
     plan.push(
       lang === "hi"
-        ? "बुवाई तब तक रोकें जब तक अगली दो बारिशों में कम से कम 5 मिमी वर्षा न हो जाए।"
+        ? "Buvai tab tak rokein jab tak agli do baarishon me kam se kam 5 mm varsha na ho jae."
         : "Hold off sowing until the next two rainfall events give at least 5mm each."
     );
   }
@@ -232,7 +292,7 @@ const buildActionPlan = ({ decision, rainfallLevel, irrigationN, hotDays, rainyD
   if (rainfallLevel === "Low" && irrigationN === "rainfed") {
     plan.push(
       lang === "hi"
-        ? "पूरक सिंचाई (ड्रिप/माइक्रो) की योजना बनाएं या सूखा सहन करने वाली फसल चुनें।"
+        ? "Poorak sinchai (drip/micro) ki yojana banaen ya sukha sahan karne wali fasal chunein."
         : "Plan supplemental irrigation (drip/micro) or pick a drought-resilient crop."
     );
   }
@@ -240,7 +300,7 @@ const buildActionPlan = ({ decision, rainfallLevel, irrigationN, hotDays, rainyD
   if (hotDays >= 3) {
     plan.push(
       lang === "hi"
-        ? "गर्मी के तनाव को कम करने के लिए सुबह जल्दी या शाम को सिंचाई करें।"
+        ? "Garmi ke tanaav ko kam karne ke liye subah jaldi ya shaam ko sinchai karein."
         : "Water in the cooler hours (early morning/evening) to cut heat stress."
     );
   }
@@ -248,7 +308,7 @@ const buildActionPlan = ({ decision, rainfallLevel, irrigationN, hotDays, rainyD
   if (rainyDays >= 5 && rainfallLevel === "High") {
     plan.push(
       lang === "hi"
-        ? "अगली बुवाई से पहले खेत की जलनिकासी जांच लें ताकि जलभराव से बचा जा सके।"
+        ? "Agli buvai se pehle khet ki jalnikaasi jaanch lein taki jalbharav se bacha ja sake."
         : "Check field drainage before the next sowing window to avoid waterlogging."
     );
   }
@@ -256,7 +316,7 @@ const buildActionPlan = ({ decision, rainfallLevel, irrigationN, hotDays, rainyD
   if (plan.length === 0) {
     plan.push(
       lang === "hi"
-        ? "सामान्य रूप से आगे बढ़ें और मौसम में तेज बदलाव के लिए रोज नजर रखें।"
+        ? "Saamanya roop se aage badhein aur mausam me tez badlaav ke liye roz nazar rakhein."
         : "Proceed as normal and monitor the weather daily for sharp changes."
     );
   }
@@ -268,18 +328,26 @@ const i18n = {
   en: {
     sow: "Conditions are suitable for sowing.",
     delay: "Weather risk is high. Delay sowing.",
+    noReliableMatch:
+      "No strong rule-based crop match was found for the selected soil, season, irrigation, and forecast conditions.",
+    noReliableAdvice:
+      "Weather may be manageable, but the current rule set does not support a confident crop recommendation for these inputs.",
     tempRisk: "Temperature risk detected.",
     rainRisk: "Low rainfall detected.",
     heat: "Heat stress expected.",
     confidenceSuffix: " (real-time advisory)",
   },
   hi: {
-    sow: "बुवाई के लिए परिस्थितियां अनुकूल हैं।",
-    delay: "मौसम जोखिम भरा है। बुवाई टालने की सलाह है।",
-    tempRisk: "तापमान से जुड़ा जोखिम पाया गया।",
-    rainRisk: "कम वर्षा पाई गई।",
-    heat: "गर्मी का तनाव हो सकता है।",
-    confidenceSuffix: " (रियल-टाइम मौसम डेटा)",
+    sow: "Buvai ke liye paristhitiyan anukool hain.",
+    delay: "Mausam jokhim bhara hai. Buvai taalne ki salah hai.",
+    noReliableMatch:
+      "Diye gaye mitti, season, sinchai aur mausam ki sthitiyon ke liye koi majboot rule-based match nahi mila.",
+    noReliableAdvice:
+      "Mausam shayad sambhala ja sakta hai, lekin vartamaan rules in inputs par koi bharosemand crop recommendation nahi dete.",
+    tempRisk: "Taapman se juda jokhim paaya gaya.",
+    rainRisk: "Kam varsha paai gai.",
+    heat: "Garmi ka tanaav ho sakta hai.",
+    confidenceSuffix: " (real-time advisory)",
   },
 };
 
@@ -319,14 +387,15 @@ const getCropRecommendation = (req, res) => {
     const scored = candidateRules.map((rule) => scoreCropRule(rule, context));
     scored.sort((a, b) => b.score - a.score);
 
-    const recommendedCrops = scored
-      .filter((item) => item.score >= 1.5)
-      .slice(0, 4)
-      .map((item) => item.crop);
+    const bestCrop = scored[0];
+    const hasReliableMatch = Boolean(bestCrop && bestCrop.score >= 2.6);
 
-    if (!recommendedCrops.length && scored.length > 0) {
-      recommendedCrops.push(scored[0].crop);
-    }
+    const recommendedCrops = hasReliableMatch
+      ? scored
+          .filter((item) => item.score >= 1.5)
+          .slice(0, 4)
+          .map((item) => item.crop)
+      : [];
 
     let riskScore = 0;
     const riskReasons = [];
@@ -349,28 +418,45 @@ const getCropRecommendation = (req, res) => {
     const decision = riskScore >= 4 ? "DELAY_SOWING" : "SOW_NOW";
     const riskLevel = riskScore >= 5 ? "High" : riskScore >= 3 ? "Moderate" : "Low";
 
-    const bestCrop = scored[0];
     const finalReasons = [...new Set([
       ...riskReasons,
       ...(bestCrop?.dynamicReasons || []),
       ...(bestCrop?.ruleReasons || []),
     ])];
 
+    if (!hasReliableMatch) {
+      finalReasons.unshift(t.noReliableMatch);
+    }
+
     if (!finalReasons.length) {
       finalReasons.push(decision === "SOW_NOW" ? t.sow : t.delay);
     }
 
-    const actionPlan = buildActionPlan({ decision, rainfallLevel, irrigationN, hotDays, rainyDays, lang });
+    const actionPlan = buildActionPlan({
+      decision,
+      rainfallLevel,
+      irrigationN,
+      hotDays,
+      rainyDays,
+      lang,
+    });
     const matchFactor = bestCrop ? bestCrop.score : 0;
-    const confidenceValue = Math.min(98, Math.max(55, 65 + Math.round(matchFactor * 8) - riskScore * 2));
+    const confidenceValue = hasReliableMatch
+      ? Math.min(98, Math.max(55, 65 + Math.round(matchFactor * 8) - riskScore * 2))
+      : Math.min(70, Math.max(35, 40 + Math.round(matchFactor * 6) - riskScore * 2));
     const confidence = `${confidenceValue}%${t.confidenceSuffix || ""}`;
+    const advisory = hasReliableMatch
+      ? decision === "SOW_NOW"
+        ? t.sow
+        : t.delay
+      : t.noReliableAdvice;
 
     return res.json({
       location,
       decision,
       recommendedCrops,
       riskLevel: translateRiskLevel(riskLevel, lang),
-      advisory: decision === "SOW_NOW" ? t.sow : t.delay,
+      advisory,
       reasons: finalReasons,
       actionPlan,
       confidence,
