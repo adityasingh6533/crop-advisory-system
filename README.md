@@ -1,3 +1,13 @@
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/2c3f61bc-cd4d-4008-93ef-911be251bb93" />
+<img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/a5c13acc-9bd9-4a88-883c-a5f492594c26" />
+<img width="1919" height="903" alt="image" src="https://github.com/user-attachments/assets/1b29f4c3-b4ff-492a-9dda-b28afc6eaf04" />
+<img width="899" height="746" alt="image" src="https://github.com/user-attachments/assets/36864b8e-5c25-4f6a-951a-4b34c35fcf75" />
+<img width="1069" height="882" alt="image" src="https://github.com/user-attachments/assets/702c67b1-38dd-4cad-b570-e9ff5f6aa6dc" />
+
+
+
+
+
 # Hybrid Crop Advisory System with AI-based Disease Detection
 
 This project is a full-stack crop support platform that brings together:
