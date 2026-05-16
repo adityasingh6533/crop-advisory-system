@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a516aa8c-b28e-491e-82a5-ae9ea317133c" />
+
 
 # Hybrid Crop Advisory System with AI-based Disease Detection
 
